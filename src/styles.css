@@ -133,6 +133,33 @@ button {
   gap: 8px;
 }
 
+.page-nav {
+  display: flex;
+  gap: 6px;
+  background: var(--bg);
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.page-nav__link {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.page-nav__link:hover {
+  color: var(--navy);
+}
+
+.page-nav__link.is-active {
+  background: var(--navy);
+  color: #fff;
+}
+
 .btn {
   border: 1px solid var(--border);
   background: var(--card);

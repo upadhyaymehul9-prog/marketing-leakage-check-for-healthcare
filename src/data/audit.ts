@@ -17,7 +17,8 @@ export const ANSWER_ORDER: AnswerValue[] = [
 ];
 
 /**
- * Questions from BookMyClinics infographics plus proven healthcare marketing
+ * Hospital marketing & brand health questions drawn from follow-up / retention
+ * themes and branding / growth themes, plus proven healthcare marketing
  * practices (MIT/InsideSales lead-response research, HFMA/Kaufman Hall
  * patient-centric metrics, Google local SEO & review velocity, WhatsApp
  * automation case studies in India, and published PAC/LTV benchmarks).
@@ -482,7 +483,7 @@ export const AUDIT_SECTIONS: AuditSection[] = [
     id: 'growth',
     name: 'Growth, measurement & accreditation',
     description:
-      'Step 7 plus accredready: measure what matters (including campaign ROI) and earn trust through standards.',
+      'Step 7: measure what matters (including campaign ROI) and earn trust through quality standards.',
     icon: 'GR',
     theme: 'branding',
     questions: [
@@ -537,7 +538,7 @@ export const AUDIT_SECTIONS: AuditSection[] = [
         explanation:
           'Accreditation signals trust and differentiates your clinic in a crowded market.',
         recommendation:
-          'Run a gap analysis against accreditation standards with accredready or similar.',
+          'Run a gap analysis against recognized clinic accreditation / quality standards.',
         owner: 'Medical director / quality lead',
         source: 'branding',
       },

@@ -36,7 +36,7 @@ export default function Report({ result, onBack }: ReportProps) {
       </div>
 
       <header className="report__header">
-        <p className="report__eyebrow">BookMyClinics health report</p>
+        <p className="report__eyebrow">Hospital self-assessment report</p>
         <h2>Your marketing &amp; brand health report</h2>
 
         <div className="report__summary-grid">
@@ -76,15 +76,15 @@ export default function Report({ result, onBack }: ReportProps) {
         </div>
 
         <p className="report__disclaimer">
-          This is a self-assessment screening tool based on BookMyClinics
-          marketing and branding frameworks. Results should be validated against
+          This is a self-assessment screening tool based on proven hospital
+          marketing and branding practices. Results should be validated against
           your clinic&apos;s records and goals — not treated as a certification
           or exact score.
         </p>
       </header>
 
       <section className="report__section">
-        <h3>Marketing &amp; retention (from your follow-up infographic)</h3>
+        <h3>Marketing &amp; retention</h3>
         <div className="report__dept-grid">
           {marketingSections.map((s) => (
             <div key={s.sectionId} className="dept-card">
@@ -103,7 +103,7 @@ export default function Report({ result, onBack }: ReportProps) {
       </section>
 
       <section className="report__section">
-        <h3>Brand &amp; growth (from your branding plan infographic)</h3>
+        <h3>Brand &amp; growth</h3>
         <div className="report__dept-grid">
           {brandSections.map((s) => (
             <div key={s.sectionId} className="dept-card">

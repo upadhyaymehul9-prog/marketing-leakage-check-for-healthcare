@@ -10,12 +10,34 @@ beforeEach(() => {
   localStorage.clear();
 });
 
-test('shows the marketing & brand health check title', () => {
+test('shows the marketing health check page by default', () => {
   render(<App />);
   expect(
     screen.getByRole('heading', {
-      name: /Marketing & Brand Health Check/i,
+      name: /Hospital Marketing Health Check/i,
     }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('button', { name: /Marketing Health/i }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('button', { name: /Brand Health/i }),
+  ).toBeInTheDocument();
+});
+
+test('navigates to the brand health page', async () => {
+  const user = userEvent.setup();
+  render(<App />);
+
+  await user.click(screen.getByRole('button', { name: /^Brand Health$/i }));
+
+  expect(
+    screen.getByRole('heading', {
+      name: /Hospital Brand Health Check/i,
+    }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('button', { name: /Clinic identity & visual brand/i }),
   ).toBeInTheDocument();
 });
 
@@ -48,6 +70,12 @@ test('report shows marketing and brand health scores', async () => {
   ).toBeInTheDocument();
   expect(screen.getAllByText(/^Marketing health$/i).length).toBeGreaterThan(0);
   expect(screen.getAllByText(/^Brand health$/i).length).toBeGreaterThan(0);
+});
+
+test('does not mention BookMyClinics or accredready', () => {
+  render(<App />);
+  expect(screen.queryByText(/BookMyClinics/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(/accredready/i)).not.toBeInTheDocument();
 });
 
 describe('calculateAudit', () => {

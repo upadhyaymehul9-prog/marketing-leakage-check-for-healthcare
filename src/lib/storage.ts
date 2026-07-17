@@ -1,6 +1,6 @@
 import type { AuditState, Response, ResponseMap } from '../types';
 
-export const STORAGE_KEY = 'bookmyclinics-health-audit:v1';
+export const STORAGE_KEY = 'hospital-marketing-brand-audit:v1';
 const SCHEMA_VERSION = 1;
 
 const VALID = ['evidence', 'undocumented', 'partial', 'no', 'na'];

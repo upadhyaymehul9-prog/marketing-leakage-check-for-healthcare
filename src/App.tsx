@@ -3,19 +3,23 @@ import { AUDIT_SECTIONS } from './data/audit';
 import { calculateAudit } from './lib/scoring';
 import { clearState, loadState, saveState } from './lib/storage';
 import type { AnswerValue, ResponseMap } from './types';
-import AuditShell from './components/AuditShell';
+import AuditShell, { type AuditPage } from './components/AuditShell';
 import QuestionCard from './components/QuestionCard';
 import Report from './components/Report';
 
 type View = 'audit' | 'report';
 
+function sectionsFor(page: AuditPage) {
+  return AUDIT_SECTIONS.filter((s) => s.theme === page);
+}
+
 export default function App() {
   const [responses, setResponses] = useState<ResponseMap>(
     () => loadState().responses,
   );
-  const [activeSectionId, setActiveSectionId] = useState(
-    AUDIT_SECTIONS[0].id,
-  );
+  const [page, setPage] = useState<AuditPage>('marketing');
+  const pageSections = sectionsFor(page);
+  const [activeSectionId, setActiveSectionId] = useState(pageSections[0].id);
   const [view, setView] = useState<View>('audit');
   const [confirmReset, setConfirmReset] = useState(false);
 
@@ -28,8 +32,26 @@ export default function App() {
     [responses],
   );
 
+  const pageHealth =
+    page === 'marketing' ? result.marketingHealth : result.brandHealth;
+
+  const pageCompletion = useMemo(() => {
+    const ids = new Set(pageSections.flatMap((s) => s.questions.map((q) => q.id)));
+    const total = ids.size;
+    if (total === 0) return 0;
+    const answered = [...ids].filter((id) => responses[id]).length;
+    return answered / total;
+  }, [pageSections, responses]);
+
   const activeSection =
-    AUDIT_SECTIONS.find((s) => s.id === activeSectionId) ?? AUDIT_SECTIONS[0];
+    pageSections.find((s) => s.id === activeSectionId) ?? pageSections[0];
+
+  const handleNavigate = (next: AuditPage) => {
+    setPage(next);
+    const first = sectionsFor(next)[0];
+    setActiveSectionId(first.id);
+    setView('audit');
+  };
 
   const handleAnswer = (
     questionId: string,
@@ -47,7 +69,8 @@ export default function App() {
     setResponses({});
     setConfirmReset(false);
     setView('audit');
-    setActiveSectionId(AUDIT_SECTIONS[0].id);
+    setPage('marketing');
+    setActiveSectionId(sectionsFor('marketing')[0].id);
   };
 
   if (view === 'report') {
@@ -57,9 +80,13 @@ export default function App() {
   return (
     <>
       <AuditShell
-        sections={AUDIT_SECTIONS}
-        activeSectionId={activeSectionId}
+        page={page}
+        onNavigate={handleNavigate}
+        sections={pageSections}
+        activeSectionId={activeSection.id}
         result={result}
+        pageHealth={pageHealth}
+        pageCompletion={pageCompletion}
         onSelect={setActiveSectionId}
         onReset={() => setConfirmReset(true)}
         onReport={() => setView('report')}
