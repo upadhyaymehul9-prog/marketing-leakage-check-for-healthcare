@@ -1,0 +1,175 @@
+import type { AuditResult, HealthBand, Phase } from '../types';
+
+interface ReportProps {
+  result: AuditResult;
+  onBack: () => void;
+}
+
+const PHASE_LABELS: Record<Phase, string> = {
+  '30': 'First 30 days',
+  '60': 'Days 31–60',
+  '90': 'Days 61–90',
+};
+
+const HEALTH_DESC: Record<HealthBand, string> = {
+  Strong: 'Your controls are well documented. Keep measuring and refining.',
+  Developing: 'Good foundations with gaps. Focus on high-severity items next.',
+  'At Risk': 'Several important marketing or brand controls are weak or missing.',
+  Critical: 'Urgent gaps in marketing and/or brand systems need immediate attention.',
+};
+
+export default function Report({ result, onBack }: ReportProps) {
+  const phases: Phase[] = ['30', '60', '90'];
+  const marketingSections = result.sectionResults.filter(
+    (s) => s.theme === 'marketing',
+  );
+  const brandSections = result.sectionResults.filter(
+    (s) => s.theme === 'branding',
+  );
+
+  return (
+    <div className="report">
+      <div className="report__top">
+        <button type="button" className="btn btn--ghost" onClick={onBack}>
+          ← Back to questionnaire
+        </button>
+      </div>
+
+      <header className="report__header">
+        <p className="report__eyebrow">BookMyClinics health report</p>
+        <h2>Your marketing &amp; brand health report</h2>
+
+        <div className="report__summary-grid">
+          <div className="summary-card">
+            <span className="summary-card__label">Overall health</span>
+            <span
+              className={`health-badge health-badge--${result.overallHealth.toLowerCase().replace(/\s+/g, '-')}`}
+            >
+              {result.overallHealth}
+            </span>
+            <p className="summary-card__desc">
+              {HEALTH_DESC[result.overallHealth]}
+            </p>
+          </div>
+          <div className="summary-card">
+            <span className="summary-card__label">Marketing health</span>
+            <span
+              className={`health-badge health-badge--${result.marketingHealth.toLowerCase().replace(/\s+/g, '-')}`}
+            >
+              {result.marketingHealth}
+            </span>
+            <p className="summary-card__desc">
+              Patient acquisition, follow-up &amp; retention systems
+            </p>
+          </div>
+          <div className="summary-card">
+            <span className="summary-card__label">Brand health</span>
+            <span
+              className={`health-badge health-badge--${result.brandHealth.toLowerCase().replace(/\s+/g, '-')}`}
+            >
+              {result.brandHealth}
+            </span>
+            <p className="summary-card__desc">
+              Identity, online presence, experience &amp; growth
+            </p>
+          </div>
+        </div>
+
+        <p className="report__disclaimer">
+          This is a self-assessment screening tool based on BookMyClinics
+          marketing and branding frameworks. Results should be validated against
+          your clinic&apos;s records and goals — not treated as a certification
+          or exact score.
+        </p>
+      </header>
+
+      <section className="report__section">
+        <h3>Marketing &amp; retention (from your follow-up infographic)</h3>
+        <div className="report__dept-grid">
+          {marketingSections.map((s) => (
+            <div key={s.sectionId} className="dept-card">
+              <span className="dept-card__name">{s.name}</span>
+              <span
+                className={`health-badge health-badge--small health-badge--${s.health.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                {s.answered > 0 ? s.health : 'Not started'}
+              </span>
+              <span className="dept-card__count">
+                {s.answered}/{s.total} answered
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="report__section">
+        <h3>Brand &amp; growth (from your branding plan infographic)</h3>
+        <div className="report__dept-grid">
+          {brandSections.map((s) => (
+            <div key={s.sectionId} className="dept-card">
+              <span className="dept-card__name">{s.name}</span>
+              <span
+                className={`health-badge health-badge--small health-badge--${s.health.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                {s.answered > 0 ? s.health : 'Not started'}
+              </span>
+              <span className="dept-card__count">
+                {s.answered}/{s.total} answered
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="report__section">
+        <h3>Priority gaps to fix</h3>
+        {result.actions.length === 0 ? (
+          <p className="report__empty">
+            Answer more questions to surface recommendations.
+          </p>
+        ) : (
+          <ol className="report__actions">
+            {result.actions.slice(0, 12).map((a) => (
+              <li key={a.questionId} className="action-item">
+                <div className="action-item__head">
+                  <span className={`badge badge--${a.severity.toLowerCase()}`}>
+                    {a.severity}
+                  </span>
+                  <span className="action-item__section">{a.sectionName}</span>
+                </div>
+                <p className="action-item__text">{a.text}</p>
+                <p className="action-item__rec">
+                  <strong>Recommended:</strong> {a.recommendation}
+                </p>
+                <p className="action-item__owner">Owner: {a.owner}</p>
+              </li>
+            ))}
+          </ol>
+        )}
+      </section>
+
+      <section className="report__section">
+        <h3>30 / 60 / 90-day action plan</h3>
+        <div className="plan-grid">
+          {phases.map((phase) => {
+            const items = result.actions.filter((a) => a.phase === phase);
+            return (
+              <div key={phase} className="plan-column">
+                <h4>{PHASE_LABELS[phase]}</h4>
+                {items.length === 0 ? (
+                  <p className="report__empty">Nothing scheduled yet.</p>
+                ) : (
+                  <ul>
+                    {items.map((i) => (
+                      <li key={i.questionId}>{i.recommendation}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    </div>
+  );
+}

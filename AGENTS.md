@@ -4,22 +4,29 @@
 
 ### What this repo is
 
-A **BookMyClinics** marketing site (Vite + React 18 + TypeScript) with two infographic-style pages:
+**BookMyClinics Marketing & Brand Health Check** — a browser-only questionnaire where hospitals/clinics answer operational questions derived from two BookMyClinics infographics:
 
-1. **Follow-up Reminder System** — visit-based care → long-term patient revenue
-2. **Clinic Branding Plan** — 7-step world-class branding guide (BookMyClinics + accredready)
+1. **Follow-up / marketing infographic** — patient acquisition, reminders, retention, chronic care
+2. **Branding plan infographic** — identity, online presence, patient experience, growth & accreditation
 
-Fully client-side; no backend, database, or auth. Navigate between pages via the header tabs (route-free `useState` in `App.tsx`).
+The app scores **marketing health** and **brand health** separately and produces a prioritized report with a 30/60/90-day action plan. State persists in `localStorage` key `bookmyclinics-health-audit:v1`.
 
-### Commands (see `package.json` scripts)
+Tech: Vite + React 18 + TypeScript. No backend.
 
-- Dev server: `npm run dev` — `http://localhost:5173`, binds `0.0.0.0`.
-- Tests: `npm test -- --run`
-- Lint: `npm run lint`
-- Build: `npm run build`
+### Commands
+
+- `npm run dev` → `http://localhost:5173`
+- `npm test -- --run`
+- `npm run lint`
+- `npm run build`
+
+### Key files
+
+- `src/data/audit.ts` — 6 sections, ~25 questions from both infographics
+- `src/lib/scoring.ts` — health bands: Strong / Developing / At Risk / Critical
+- `src/components/` — AuditShell, QuestionCard, Report
 
 ### Non-obvious notes
 
-- Page components live in `src/pages/`; shared chrome in `src/components/Header.tsx`.
-- The old revenue-leakage audit (from `docs/superpowers/`) was removed — the product vision is the BookMyClinics infographics, not that audit tool.
-- Only `npm run dev` is needed to exercise the full product.
+- This is a **self-assessment questionnaire**, not static marketing landing pages.
+- `docs/superpowers/` describes an older revenue-leakage audit — ignore it; the product vision is the BookMyClinics health check.
