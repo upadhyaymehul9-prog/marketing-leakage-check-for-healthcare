@@ -23,6 +23,92 @@ export const ANSWER_ORDER: AnswerValue[] = [
 export const AUDIT_SECTIONS: AuditSection[] = [
   // ─── MARKETING PAGE ───────────────────────────────────────────────
   {
+    id: 'digital-presence',
+    name: 'Digital presence foundation',
+    description:
+      'Whether the hospital exists and is findable online — the starting gate for every marketing campaign.',
+    objective:
+      'Confirm the hospital has a basic, active digital presence before assessing advanced marketing controls.',
+    icon: 'DP',
+    theme: 'marketing',
+    questions: [
+      {
+        id: 'dp-has-presence',
+        text: 'Do you have a digital presence?',
+        severity: 'Critical',
+        controlArea: 'Digital presence',
+        evidenceHint:
+          'Live website URL and/or Google Business Profile link and/or WhatsApp Business number that patients can reach today.',
+        explanation:
+          'Without an active digital presence, paid ads, SEO, reviews, and online booking have nowhere to land. This is the first control in the marketing audit.',
+        recommendation:
+          'Establish at least: a mobile-friendly website or landing page, a claimed Google Business Profile, and a business WhatsApp/phone channel patients can use.',
+        owner: 'Owner / marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'dp-website',
+        text: 'Does the hospital have a live website (or dedicated landing page) that loads on mobile?',
+        severity: 'Critical',
+        controlArea: 'Website existence',
+        evidenceHint:
+          'Open the URL on a phone; confirm services, contact, and location are visible.',
+        recommendation:
+          'Publish a simple mobile site with services, doctors, timings, address, and call/WhatsApp CTA.',
+        owner: 'Marketing / web owner',
+        source: 'marketing',
+      },
+      {
+        id: 'dp-gbp',
+        text: 'Is the hospital listed and claimed on Google Business Profile (Google Maps)?',
+        severity: 'Critical',
+        controlArea: 'Google Business Profile',
+        evidenceHint:
+          'GBP dashboard showing “Claimed” plus correct name, address, and phone.',
+        recommendation:
+          'Claim and verify GBP; complete hours, categories, photos, and services.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'dp-whatsapp',
+        text: 'Can patients reach the hospital on WhatsApp Business (or an equivalent chat channel)?',
+        severity: 'High',
+        controlArea: 'Chat channel',
+        evidenceHint:
+          'WhatsApp Business profile link or QR that opens a working chat.',
+        recommendation:
+          'Set up WhatsApp Business with greeting, hours, and a monitored inbox.',
+        owner: 'Front office / marketing',
+        source: 'marketing',
+      },
+      {
+        id: 'dp-consistent-nap',
+        text: 'Are hospital name, address, and phone consistent across website, Google, and major listings?',
+        severity: 'High',
+        controlArea: 'NAP consistency',
+        evidenceHint:
+          'Side-by-side check of name/address/phone on website vs GBP vs one directory.',
+        recommendation:
+          'Pick one official NAP and fix mismatches everywhere patients search.',
+        owner: 'Admin / marketing',
+        source: 'marketing',
+      },
+      {
+        id: 'dp-findable',
+        text: 'Can a new patient find the hospital by searching the hospital name or main specialty + city on Google?',
+        severity: 'High',
+        controlArea: 'Search findability',
+        evidenceHint:
+          'Incognito search results for hospital name and one “specialty + city” query.',
+        recommendation:
+          'Fix GBP, citations, and homepage title/meta so branded and specialty searches surface you.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+    ],
+  },
+  {
     id: 'lead-intake',
     name: 'Lead intake & response',
     description:

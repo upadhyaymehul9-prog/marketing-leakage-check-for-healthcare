@@ -55,9 +55,17 @@ test('selecting an answer updates section completion', async () => {
   await user.click(within(card).getByRole('button', { name: /^No$/i }));
 
   const item = screen.getByRole('button', {
-    name: /Lead intake & response/i,
+    name: /Digital presence foundation/i,
   });
-  expect(within(item).getByText(/1\/7/)).toBeInTheDocument();
+  expect(within(item).getByText(/1\/6/)).toBeInTheDocument();
+});
+
+test('first question asks about digital presence', () => {
+  render(<App />);
+  const card = screen.getAllByRole('article')[0];
+  expect(
+    within(card).getByText(/Do you have a digital presence\?/i),
+  ).toBeInTheDocument();
 });
 
 test('report shows marketing and brand health scores', async () => {
