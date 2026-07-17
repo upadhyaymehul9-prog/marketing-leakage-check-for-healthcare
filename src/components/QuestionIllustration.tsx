@@ -6,21 +6,21 @@ interface QuestionIllustrationProps {
 }
 
 const MOTIF_COLORS: Record<string, { bg: string; accent: string; ink: string }> = {
-  presence: { bg: '#e8f6f5', accent: '#00a69c', ink: '#002d62' },
-  leads: { bg: '#eef3fb', accent: '#0a4d8c', ink: '#002d62' },
-  funnel: { bg: '#f3eef8', accent: '#6b4c9a', ink: '#002d62' },
-  ads: { bg: '#fff4e8', accent: '#d97b2d', ink: '#002d62' },
-  maps: { bg: '#e9f7ef', accent: '#2e9e6e', ink: '#002d62' },
-  content: { bg: '#eef6ff', accent: '#3b7ddd', ink: '#002d62' },
-  referral: { bg: '#fef6e8', accent: '#c9a227', ink: '#002d62' },
-  retain: { bg: '#e8f7f3', accent: '#1a9b7a', ink: '#002d62' },
-  identity: { bg: '#f0eef8', accent: '#6b4c9a', ink: '#002d62' },
-  brand: { bg: '#fdeeee', accent: '#d64545', ink: '#002d62' },
-  website: { bg: '#eaf2fb', accent: '#0a4d8c', ink: '#002d62' },
-  experience: { bg: '#eef9f4', accent: '#2e9e6e', ink: '#002d62' },
-  reviews: { bg: '#fff8e6', accent: '#c9a227', ink: '#002d62' },
-  governance: { bg: '#eef1f6', accent: '#44566e', ink: '#002d62' },
-  generic: { bg: '#f0f4f9', accent: '#00a69c', ink: '#002d62' },
+  presence: { bg: '#0c1e35', accent: '#4fc3f7', ink: '#eef4f9' },
+  leads: { bg: '#0c1e35', accent: '#4fc3f7', ink: '#eef4f9' },
+  funnel: { bg: '#0c1e35', accent: '#9b7dd4', ink: '#eef4f9' },
+  ads: { bg: '#0c1e35', accent: '#f4a441', ink: '#eef4f9' },
+  maps: { bg: '#0c1e35', accent: '#4caf7d', ink: '#eef4f9' },
+  content: { bg: '#0c1e35', accent: '#4fc3f7', ink: '#eef4f9' },
+  referral: { bg: '#0c1e35', accent: '#c9a84c', ink: '#eef4f9' },
+  retain: { bg: '#0c1e35', accent: '#4caf7d', ink: '#eef4f9' },
+  identity: { bg: '#0c1e35', accent: '#9b7dd4', ink: '#eef4f9' },
+  brand: { bg: '#0c1e35', accent: '#e05a5a', ink: '#eef4f9' },
+  website: { bg: '#0c1e35', accent: '#4fc3f7', ink: '#eef4f9' },
+  experience: { bg: '#0c1e35', accent: '#4caf7d', ink: '#eef4f9' },
+  reviews: { bg: '#0c1e35', accent: '#c9a84c', ink: '#eef4f9' },
+  governance: { bg: '#0c1e35', accent: '#3a5870', ink: '#eef4f9' },
+  generic: { bg: '#0c1e35', accent: '#c9a84c', ink: '#eef4f9' },
 };
 
 function MotifIcon({ motif, accent }: { motif: string; accent: string }) {
@@ -145,7 +145,7 @@ export default function QuestionIllustration({
         />
 
         {/* Motif icon panel */}
-        <rect x="28" y="28" width="120" height="100" rx="14" fill="#fff" />
+        <rect x="28" y="28" width="120" height="100" rx="14" fill="#081525" />
         <svg x="36" y="38" width="104" height="80" viewBox="0 0 104 80">
           <MotifIcon motif={meta.motif} accent={colors.accent} />
         </svg>
@@ -207,7 +207,7 @@ export default function QuestionIllustration({
                 width="188"
                 height="82"
                 rx="12"
-                fill="#fff"
+                fill="#081525"
               />
               <circle
                 cx={x + 22}
