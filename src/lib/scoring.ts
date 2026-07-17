@@ -3,6 +3,7 @@ import type {
   AuditQuestion,
   AuditResult,
   AuditSection,
+  ConfidenceLevel,
   HealthBand,
   Phase,
   ReportAction,
@@ -46,6 +47,12 @@ function healthFromScore(score: number): HealthBand {
   if (score < 0.4) return 'Developing';
   if (score < 0.7) return 'At Risk';
   return 'Critical';
+}
+
+function confidenceFromCompletion(completion: number): ConfidenceLevel {
+  if (completion >= 0.9) return 'High';
+  if (completion >= 0.6) return 'Medium';
+  return 'Low';
 }
 
 function isApplicable(answer: AnswerValue | undefined): boolean {
@@ -153,15 +160,17 @@ export function calculateAudit(
 
   const marketingScore = themeScore(sections, responses, 'marketing');
   const brandScore = themeScore(sections, responses, 'branding');
+  const completion = totalCount === 0 ? 0 : answeredCount / totalCount;
 
   return {
-    completion: totalCount === 0 ? 0 : answeredCount / totalCount,
+    completion,
     answeredCount,
     totalCount,
     sectionResults,
     marketingHealth: healthFromScore(marketingScore),
     brandHealth: healthFromScore(brandScore),
     overallHealth: healthFromScore(scoreFrom(overall)),
+    confidence: confidenceFromCompletion(completion),
     actions: buildActions(sections, responses),
   };
 }

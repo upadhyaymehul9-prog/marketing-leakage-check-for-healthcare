@@ -4,6 +4,8 @@ export type AnswerValue = 'evidence' | 'undocumented' | 'partial' | 'no' | 'na';
 
 export type HealthBand = 'Strong' | 'Developing' | 'At Risk' | 'Critical';
 
+export type ConfidenceLevel = 'High' | 'Medium' | 'Low';
+
 export type Phase = '30' | '60' | '90';
 
 export interface AuditQuestion {
@@ -76,5 +78,6 @@ export interface AuditResult {
   marketingHealth: HealthBand;
   brandHealth: HealthBand;
   overallHealth: HealthBand;
+  confidence: ConfidenceLevel;
   actions: ReportAction[];
 }

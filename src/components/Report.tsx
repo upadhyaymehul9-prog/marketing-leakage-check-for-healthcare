@@ -1,4 +1,4 @@
-import type { AuditResult, HealthBand, Phase } from '../types';
+import type { AuditResult, ConfidenceLevel, HealthBand, Phase } from '../types';
 import { getQuestionHowTo } from '../data/questionHowTo';
 
 interface ReportProps {
@@ -17,6 +17,12 @@ const HEALTH_DESC: Record<HealthBand, string> = {
   Developing: 'Good foundations with gaps. Focus on high-severity items next.',
   'At Risk': 'Several important marketing or brand controls are weak or missing.',
   Critical: 'Urgent gaps in marketing and/or brand systems need immediate attention.',
+};
+
+const CONFIDENCE_DESC: Record<ConfidenceLevel, string> = {
+  High: '90%+ of questions answered — the health bands above reflect your full picture.',
+  Medium: '60–89% answered — answer more questions to firm up the health bands above.',
+  Low: 'Under 60% answered — treat the health bands above as a rough first look, not a verdict.',
 };
 
 export default function Report({ result, onBack }: ReportProps) {
@@ -72,6 +78,18 @@ export default function Report({ result, onBack }: ReportProps) {
             </span>
             <p className="summary-card__desc">
               Identity, online presence, experience &amp; growth
+            </p>
+          </div>
+          <div className="summary-card">
+            <span className="summary-card__label">Confidence</span>
+            <span
+              className={`confidence-badge confidence-badge--${result.confidence.toLowerCase()}`}
+            >
+              {result.confidence}
+            </span>
+            <p className="summary-card__desc">
+              {CONFIDENCE_DESC[result.confidence]} ({result.answeredCount}/
+              {result.totalCount} answered)
             </p>
           </div>
         </div>
