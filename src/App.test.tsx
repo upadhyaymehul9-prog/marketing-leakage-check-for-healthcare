@@ -47,14 +47,13 @@ test('shows detailed audit evidence hints on questions', () => {
   expect(screen.getByText(/Audit objective:/i)).toBeInTheDocument();
 });
 
-test('shows how-to-achieve guidance for sections and questions', () => {
+test('shows an explainer illustration on each question', () => {
   render(<App />);
   expect(
-    screen.getByText(/How to achieve this section \(step-by-step\)/i),
-  ).toBeInTheDocument();
+    screen.getAllByRole('img', { name: /Illustration:/i }).length,
+  ).toBeGreaterThan(0);
   expect(
-    screen.getAllByText(/How to achieve this \(if you don’t know how\)/i)
-      .length,
+    screen.getAllByText(/Visual guide for this control/i).length,
   ).toBeGreaterThan(0);
 });
 
