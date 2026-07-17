@@ -47,6 +47,17 @@ test('shows detailed audit evidence hints on questions', () => {
   expect(screen.getByText(/Audit objective:/i)).toBeInTheDocument();
 });
 
+test('shows how-to-achieve guidance for sections and questions', () => {
+  render(<App />);
+  expect(
+    screen.getByText(/How to achieve this section \(step-by-step\)/i),
+  ).toBeInTheDocument();
+  expect(
+    screen.getAllByText(/How to achieve this \(if you don’t know how\)/i)
+      .length,
+  ).toBeGreaterThan(0);
+});
+
 test('selecting an answer updates section completion', async () => {
   const user = userEvent.setup();
   render(<App />);

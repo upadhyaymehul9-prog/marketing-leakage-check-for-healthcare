@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AUDIT_SECTIONS } from './data/audit';
+import { SECTION_HOW_TO } from './data/howToAchieve';
 import { calculateAudit } from './lib/scoring';
 import { clearState, loadState, saveState } from './lib/storage';
 import type { AnswerValue, ResponseMap } from './types';
@@ -97,9 +98,17 @@ export default function App() {
           <div className="section-intro__objective">
             <strong>Audit objective:</strong> {activeSection.objective}
           </div>
+          <details className="how-to how-to--section" open>
+            <summary>How to achieve this section (step-by-step)</summary>
+            <ol className="how-to__steps">
+              {(SECTION_HOW_TO[activeSection.id] ?? []).map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+          </details>
           <p className="section-intro__meta">
-            {activeSection.questions.length} controls in this domain · Answer
-            based on current evidence
+            {activeSection.questions.length} controls in this domain · Open
+            “How to achieve” on any question if you don’t know where to start
           </p>
         </section>
         <div className="question-list">

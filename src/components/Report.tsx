@@ -140,7 +140,7 @@ export default function Report({ result, onBack }: ReportProps) {
                 </div>
                 <p className="action-item__text">{a.text}</p>
                 <p className="action-item__rec">
-                  <strong>Recommended:</strong> {a.recommendation}
+                  <strong>How to achieve:</strong> {a.recommendation}
                 </p>
                 <p className="action-item__owner">Owner: {a.owner}</p>
               </li>

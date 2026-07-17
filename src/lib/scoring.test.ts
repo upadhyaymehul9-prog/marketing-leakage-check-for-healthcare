@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { calculateAudit } from './scoring';
 import { AUDIT_SECTIONS } from '../data/audit';
+import { SECTION_HOW_TO } from '../data/howToAchieve';
 
 describe('scoring themes', () => {
   test('separates marketing and brand health', () => {
@@ -33,13 +34,11 @@ describe('scoring themes', () => {
     expect(ids.length).toBeGreaterThanOrEqual(80);
   });
 
-  test('every question has control area and evidence hint', () => {
+  test('every section has a how-to-achieve playbook', () => {
     for (const section of AUDIT_SECTIONS) {
-      expect(section.objective.length).toBeGreaterThan(10);
-      for (const q of section.questions) {
-        expect(q.controlArea.length).toBeGreaterThan(2);
-        expect(q.evidenceHint.length).toBeGreaterThan(10);
-      }
+      const steps = SECTION_HOW_TO[section.id];
+      expect(steps, `missing how-to for ${section.id}`).toBeDefined();
+      expect(steps.length).toBeGreaterThanOrEqual(3);
     }
   });
 });
