@@ -2,7 +2,12 @@ export type Severity = 'Critical' | 'High' | 'Medium';
 
 export type AnswerValue = 'evidence' | 'undocumented' | 'partial' | 'no' | 'na';
 
-export type HealthBand = 'Strong' | 'Developing' | 'At Risk' | 'Critical';
+export type HealthBand =
+  | 'Strong'
+  | 'Developing'
+  | 'At Risk'
+  | 'Critical'
+  | 'Not Assessed';
 
 export type ConfidenceLevel = 'High' | 'Medium' | 'Low';
 

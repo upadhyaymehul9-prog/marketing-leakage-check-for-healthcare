@@ -127,6 +127,9 @@ button {
 .score-pill__value--critical {
   color: var(--red);
 }
+.score-pill__value--not-assessed {
+  color: var(--muted);
+}
 
 .audit-header__actions {
   display: flex;
@@ -649,6 +652,11 @@ button {
   background: rgba(224, 90, 90, 0.15);
   border-color: rgba(224, 90, 90, 0.3);
   color: var(--red);
+}
+.health-badge--not-assessed {
+  background: rgba(58, 88, 112, 0.3);
+  border-color: rgba(58, 88, 112, 0.5);
+  color: var(--text);
 }
 
 .confidence-badge {

@@ -49,6 +49,11 @@ function healthFromScore(score: number): HealthBand {
   return 'Critical';
 }
 
+function healthFromAcc(acc: Acc): HealthBand {
+  if (acc.max === 0) return 'Not Assessed';
+  return healthFromScore(scoreFrom(acc));
+}
+
 function confidenceFromCompletion(completion: number): ConfidenceLevel {
   if (completion >= 0.9) return 'High';
   if (completion >= 0.6) return 'Medium';
@@ -75,11 +80,11 @@ function scoreFrom(acc: Acc): number {
   return acc.max === 0 ? 0 : acc.actual / acc.max;
 }
 
-function themeScore(
+function themeAcc(
   sections: AuditSection[],
   responses: ResponseMap,
   theme: 'marketing' | 'branding',
-): number {
+): Acc {
   const acc: Acc = { actual: 0, max: 0 };
   for (const section of sections) {
     if (section.theme !== theme) continue;
@@ -87,7 +92,7 @@ function themeScore(
       accumulate(acc, q, responses[q.id]?.answer);
     }
   }
-  return scoreFrom(acc);
+  return acc;
 }
 
 function buildActions(
@@ -154,12 +159,12 @@ export function calculateAudit(
       answered,
       total: section.questions.length,
       score,
-      health: healthFromScore(score),
+      health: healthFromAcc(acc),
     };
   });
 
-  const marketingScore = themeScore(sections, responses, 'marketing');
-  const brandScore = themeScore(sections, responses, 'branding');
+  const marketingAcc = themeAcc(sections, responses, 'marketing');
+  const brandAcc = themeAcc(sections, responses, 'branding');
   const completion = totalCount === 0 ? 0 : answeredCount / totalCount;
 
   return {
@@ -167,9 +172,9 @@ export function calculateAudit(
     answeredCount,
     totalCount,
     sectionResults,
-    marketingHealth: healthFromScore(marketingScore),
-    brandHealth: healthFromScore(brandScore),
-    overallHealth: healthFromScore(scoreFrom(overall)),
+    marketingHealth: healthFromAcc(marketingAcc),
+    brandHealth: healthFromAcc(brandAcc),
+    overallHealth: healthFromAcc(overall),
     confidence: confidenceFromCompletion(completion),
     actions: buildActions(sections, responses),
   };

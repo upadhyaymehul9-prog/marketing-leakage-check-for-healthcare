@@ -23,6 +23,7 @@ const HEALTH_DESC: Record<HealthBand, string> = {
   Developing: 'Good foundations with gaps. Focus on high-severity items next.',
   'At Risk': 'Several important marketing or brand controls are weak or missing.',
   Critical: 'Urgent gaps in marketing and/or brand systems need immediate attention.',
+  'Not Assessed': 'Answer questions in this area to generate a health score.',
 };
 
 const CONFIDENCE_DESC: Record<ConfidenceLevel, string> = {

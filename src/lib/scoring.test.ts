@@ -12,12 +12,29 @@ describe('scoring themes', () => {
     expect(result.sectionResults.length).toBe(14);
   });
 
-  test('na answers count as complete without adding risk', () => {
+  test('na answers count toward completion without adding risk', () => {
     const q = AUDIT_SECTIONS[0].questions[0];
     const result = calculateAudit(AUDIT_SECTIONS, {
       [q.id]: { answer: 'na', updatedAt: 0 },
     });
     expect(result.completion).toBeGreaterThan(0);
+    // no applicable (non-N/A) answers yet, so health is unscored rather than
+    // defaulting to "Strong" on zero data
+    expect(result.overallHealth).toBe('Not Assessed');
+  });
+
+  test('health defaults to Not Assessed with no applicable answers, not Strong', () => {
+    const empty = calculateAudit(AUDIT_SECTIONS, {});
+    expect(empty.overallHealth).toBe('Not Assessed');
+    expect(empty.marketingHealth).toBe('Not Assessed');
+    expect(empty.brandHealth).toBe('Not Assessed');
+  });
+
+  test('health reflects real answers once provided', () => {
+    const q = AUDIT_SECTIONS[0].questions[0];
+    const result = calculateAudit(AUDIT_SECTIONS, {
+      [q.id]: { answer: 'evidence', updatedAt: 0 },
+    });
     expect(result.overallHealth).toBe('Strong');
   });
 
