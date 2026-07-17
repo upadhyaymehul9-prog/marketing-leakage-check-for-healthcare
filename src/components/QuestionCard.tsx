@@ -14,12 +14,6 @@ export default function QuestionCard({
   response,
   onChange,
 }: QuestionCardProps) {
-  const needsHowTo =
-    !response?.answer ||
-    response.answer === 'no' ||
-    response.answer === 'partial' ||
-    response.answer === 'undocumented';
-
   return (
     <article className="question-card">
       <header className="question-card__header">
@@ -58,7 +52,7 @@ export default function QuestionCard({
         })}
       </div>
 
-      <details className="how-to" open={needsHowTo}>
+      <details className="how-to">
         <summary>How to achieve this (if you don’t know how)</summary>
         <p className="how-to__body">{question.recommendation}</p>
         <p className="how-to__owner">Suggested owner: {question.owner}</p>

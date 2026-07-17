@@ -98,7 +98,7 @@ export default function App() {
           <div className="section-intro__objective">
             <strong>Audit objective:</strong> {activeSection.objective}
           </div>
-          <details className="how-to how-to--section" open>
+          <details className="how-to how-to--section">
             <summary>How to achieve this section (step-by-step)</summary>
             <ol className="how-to__steps">
               {(SECTION_HOW_TO[activeSection.id] ?? []).map((step) => (
