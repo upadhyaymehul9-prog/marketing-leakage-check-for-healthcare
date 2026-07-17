@@ -340,8 +340,15 @@ button {
   color: var(--text);
 }
 
+.how-to__summary {
+  margin: 10px 0 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
 .how-to__owner {
-  margin: 0;
+  margin: 10px 0 0;
   font-size: 12px;
   color: var(--muted);
 }
@@ -354,6 +361,7 @@ button {
   gap: 8px;
   font-size: 13px;
   color: var(--text);
+  line-height: 1.45;
 }
 
 .control-chip {
@@ -687,6 +695,26 @@ button {
 .action-item__rec {
   margin: 0 0 4px;
   font-size: 13px;
+}
+
+.action-item__howto {
+  margin: 8px 0;
+  font-size: 13px;
+  background: #eef9f8;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.action-item__howto p {
+  margin: 6px 0;
+}
+
+.action-item__howto ol {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .action-item__owner {

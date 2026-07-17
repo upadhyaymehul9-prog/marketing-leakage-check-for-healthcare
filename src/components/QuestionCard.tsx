@@ -1,5 +1,6 @@
 import type { AnswerValue, AuditQuestion, Response } from '../types';
 import { ANSWER_LABELS, ANSWER_ORDER } from '../data/audit';
+import { getQuestionHowTo } from '../data/questionHowTo';
 
 interface QuestionCardProps {
   index: number;
@@ -14,6 +15,8 @@ export default function QuestionCard({
   response,
   onChange,
 }: QuestionCardProps) {
+  const howTo = getQuestionHowTo(question.id, question.recommendation);
+
   return (
     <article className="question-card">
       <header className="question-card__header">
@@ -54,7 +57,14 @@ export default function QuestionCard({
 
       <details className="how-to">
         <summary>How to achieve this (if you don’t know how)</summary>
-        <p className="how-to__body">{question.recommendation}</p>
+        <p className="how-to__summary">
+          <strong>In short:</strong> {howTo.summary}
+        </p>
+        <ol className="how-to__steps">
+          {howTo.steps.map((step) => (
+            <li key={step}>{step}</li>
+          ))}
+        </ol>
         <p className="how-to__owner">Suggested owner: {question.owner}</p>
       </details>
 

@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { calculateAudit } from './scoring';
 import { AUDIT_SECTIONS } from '../data/audit';
 import { SECTION_HOW_TO } from '../data/howToAchieve';
+import { QUESTION_HOW_TO } from '../data/questionHowTo';
 
 describe('scoring themes', () => {
   test('separates marketing and brand health', () => {
@@ -38,7 +39,17 @@ describe('scoring themes', () => {
     for (const section of AUDIT_SECTIONS) {
       const steps = SECTION_HOW_TO[section.id];
       expect(steps, `missing how-to for ${section.id}`).toBeDefined();
-      expect(steps.length).toBeGreaterThanOrEqual(3);
+      expect(steps.length).toBeGreaterThanOrEqual(5);
+    }
+  });
+
+  test('every question has a detailed how-to with multiple steps', () => {
+    for (const section of AUDIT_SECTIONS) {
+      for (const q of section.questions) {
+        const howTo = QUESTION_HOW_TO[q.id];
+        expect(howTo, `missing question how-to for ${q.id}`).toBeDefined();
+        expect(howTo.steps.length).toBeGreaterThanOrEqual(5);
+      }
     }
   });
 });

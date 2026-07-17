@@ -1,4 +1,5 @@
 import type { AuditResult, HealthBand, Phase } from '../types';
+import { getQuestionHowTo } from '../data/questionHowTo';
 
 interface ReportProps {
   result: AuditResult;
@@ -129,7 +130,9 @@ export default function Report({ result, onBack }: ReportProps) {
           </p>
         ) : (
           <ol className="report__actions">
-            {result.actions.slice(0, 12).map((a) => (
+            {result.actions.slice(0, 12).map((a) => {
+              const howTo = getQuestionHowTo(a.questionId, a.recommendation);
+              return (
               <li key={a.questionId} className="action-item">
                 <div className="action-item__head">
                   <span className={`badge badge--${a.severity.toLowerCase()}`}>
@@ -139,12 +142,19 @@ export default function Report({ result, onBack }: ReportProps) {
                   <span className="action-item__section">{a.sectionName}</span>
                 </div>
                 <p className="action-item__text">{a.text}</p>
-                <p className="action-item__rec">
-                  <strong>How to achieve:</strong> {a.recommendation}
-                </p>
+                <div className="action-item__howto">
+                  <strong>How to achieve:</strong>
+                  <p>{howTo.summary}</p>
+                  <ol>
+                    {howTo.steps.slice(0, 6).map((step) => (
+                      <li key={step}>{step}</li>
+                    ))}
+                  </ol>
+                </div>
                 <p className="action-item__owner">Owner: {a.owner}</p>
               </li>
-            ))}
+              );
+            })}
           </ol>
         )}
       </section>
