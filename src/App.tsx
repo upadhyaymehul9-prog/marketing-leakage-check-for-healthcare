@@ -94,6 +94,13 @@ export default function App() {
         <section className="section-intro">
           <h2>{activeSection.name}</h2>
           <p>{activeSection.description}</p>
+          <div className="section-intro__objective">
+            <strong>Audit objective:</strong> {activeSection.objective}
+          </div>
+          <p className="section-intro__meta">
+            {activeSection.questions.length} controls in this domain · Answer
+            based on current evidence
+          </p>
         </section>
         <div className="question-list">
           {activeSection.questions.map((q, i) => (

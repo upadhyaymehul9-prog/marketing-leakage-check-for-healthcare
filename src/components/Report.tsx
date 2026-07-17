@@ -135,6 +135,7 @@ export default function Report({ result, onBack }: ReportProps) {
                   <span className={`badge badge--${a.severity.toLowerCase()}`}>
                     {a.severity}
                   </span>
+                  <span className="control-chip">{a.controlArea}</span>
                   <span className="action-item__section">{a.sectionName}</span>
                 </div>
                 <p className="action-item__text">{a.text}</p>

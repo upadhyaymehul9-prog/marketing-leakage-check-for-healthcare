@@ -7,7 +7,7 @@ describe('scoring themes', () => {
     const result = calculateAudit(AUDIT_SECTIONS, {});
     expect(result.marketingHealth).toBeDefined();
     expect(result.brandHealth).toBeDefined();
-    expect(result.sectionResults.length).toBe(7);
+    expect(result.sectionResults.length).toBe(13);
   });
 
   test('na answers count as complete without adding risk', () => {
@@ -27,6 +27,18 @@ describe('scoring themes', () => {
     expect(ids).toContain('camp-ltv');
     expect(ids).toContain('camp-landing');
     expect(ids).toContain('ret-recall');
-    expect(ids).toContain('ex-nps');
+    expect(ids).toContain('rp-nps');
+    expect(ids).toContain('li-five-min');
+    expect(ids.length).toBeGreaterThanOrEqual(80);
+  });
+
+  test('every question has control area and evidence hint', () => {
+    for (const section of AUDIT_SECTIONS) {
+      expect(section.objective.length).toBeGreaterThan(10);
+      for (const q of section.questions) {
+        expect(q.controlArea.length).toBeGreaterThan(2);
+        expect(q.evidenceHint.length).toBeGreaterThan(10);
+      }
+    }
   });
 });

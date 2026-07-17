@@ -10,10 +10,13 @@ export interface AuditQuestion {
   id: string;
   text: string;
   severity: Severity;
+  /** Short label for the control being audited */
+  controlArea: string;
+  /** What evidence an auditor should look for */
+  evidenceHint: string;
   explanation?: string;
   recommendation: string;
   owner: string;
-  /** Which infographic theme this question draws from */
   source: 'marketing' | 'branding';
 }
 
@@ -23,6 +26,8 @@ export interface AuditSection {
   description: string;
   icon: string;
   theme: 'marketing' | 'branding';
+  /** Audit objective for this domain */
+  objective: string;
   questions: AuditQuestion[];
 }
 
@@ -55,6 +60,7 @@ export interface ReportAction {
   questionId: string;
   sectionName: string;
   severity: Severity;
+  controlArea: string;
   answer: AnswerValue | 'unanswered';
   text: string;
   recommendation: string;

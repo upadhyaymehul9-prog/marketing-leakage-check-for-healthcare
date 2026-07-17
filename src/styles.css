@@ -278,9 +278,50 @@ button {
 }
 
 .section-intro p {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
   color: var(--muted);
-  max-width: 640px;
+  max-width: 720px;
+}
+
+.section-intro__objective {
+  background: #e8f6f5;
+  border-left: 3px solid var(--teal);
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  max-width: 720px;
+  margin-bottom: 8px;
+}
+
+.section-intro__meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 20px !important;
+}
+
+.control-chip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: #eef2f8;
+  color: var(--navy);
+}
+
+.question-card__evidence {
+  font-size: 12px;
+  color: var(--text);
+  background: #f7f9fc;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+}
+
+.question-card__owner {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--muted);
 }
 
 .question-list {

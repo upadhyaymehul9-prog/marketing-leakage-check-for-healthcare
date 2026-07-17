@@ -22,7 +22,7 @@ Tech: Vite + React 18 + TypeScript. No backend. No third-party product branding 
 
 ### Key files
 
-- `src/data/audit.ts` — 7 sections (~41 questions)
+- `src/data/audit.ts` — 13 detailed audit domains (~85+ controls) with evidence hints
 - `src/lib/scoring.ts` — health bands: Strong / Developing / At Risk / Critical
 - `src/App.tsx` — two-page navigation (`marketing` | `branding`)
 - `src/components/` — AuditShell, QuestionCard, Report
@@ -30,5 +30,6 @@ Tech: Vite + React 18 + TypeScript. No backend. No third-party product branding 
 ### Non-obvious notes
 
 - Answers are shared across both pages (one stored state); each page filters sidebar sections by theme.
+- Each control includes **control area**, **evidence to check**, owner, and recommendation — treat edits as audit-grade content.
 - `docs/superpowers/` describes an older revenue-leakage audit — not the current product.
 - Campaign question explanations cite industry research; do not invent unverified statistics when editing.

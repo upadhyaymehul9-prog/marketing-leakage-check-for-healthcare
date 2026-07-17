@@ -37,8 +37,14 @@ test('navigates to the brand health page', async () => {
     }),
   ).toBeInTheDocument();
   expect(
-    screen.getByRole('button', { name: /Clinic identity & visual brand/i }),
+    screen.getByRole('button', { name: /Clinic identity & positioning/i }),
   ).toBeInTheDocument();
+});
+
+test('shows detailed audit evidence hints on questions', () => {
+  render(<App />);
+  expect(screen.getAllByText(/Evidence to check:/i).length).toBeGreaterThan(0);
+  expect(screen.getByText(/Audit objective:/i)).toBeInTheDocument();
 });
 
 test('selecting an answer updates section completion', async () => {
@@ -49,7 +55,7 @@ test('selecting an answer updates section completion', async () => {
   await user.click(within(card).getByRole('button', { name: /^No$/i }));
 
   const item = screen.getByRole('button', {
-    name: /Patient acquisition & marketing/i,
+    name: /Lead intake & response/i,
   });
   expect(within(item).getByText(/1\/7/)).toBeInTheDocument();
 });

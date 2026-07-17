@@ -17,116 +17,216 @@ export const ANSWER_ORDER: AnswerValue[] = [
 ];
 
 /**
- * Hospital marketing & brand health questions drawn from follow-up / retention
- * themes and branding / growth themes, plus proven healthcare marketing
- * practices (MIT/InsideSales lead-response research, HFMA/Kaufman Hall
- * patient-centric metrics, Google local SEO & review velocity, WhatsApp
- * automation case studies in India, and published PAC/LTV benchmarks).
+ * Detailed hospital marketing & brand health audit.
+ * Each control has severity, control area, and evidence the auditor should request.
  */
 export const AUDIT_SECTIONS: AuditSection[] = [
+  // ─── MARKETING PAGE ───────────────────────────────────────────────
   {
-    id: 'acquisition',
-    name: 'Patient acquisition & marketing',
+    id: 'lead-intake',
+    name: 'Lead intake & response',
     description:
-      'How effectively your clinic turns enquiries into booked, attending patients — the foundation of every successful campaign.',
-    icon: 'MK',
+      'Speed, ownership, and recovery of every patient enquiry before it goes cold.',
+    objective:
+      'Confirm that every inbound lead is captured, owned, responded to within a proven SLA, and recovered if missed.',
+    icon: 'LI',
     theme: 'marketing',
     questions: [
       {
-        id: 'acq-lead-response',
-        text: 'Are inbound enquiries (calls, WhatsApp, web forms) contacted within 5 minutes during working hours?',
+        id: 'li-five-min',
+        text: 'Are inbound enquiries (calls, WhatsApp, web forms) first-contacted within 5 minutes during working hours?',
         severity: 'Critical',
+        controlArea: 'Speed-to-lead SLA',
+        evidenceHint:
+          'Sample 20 recent leads with timestamps: enquiry received → first human/bot reply.',
         explanation:
-          'MIT/InsideSales research found contacting a web lead in 5 vs 30 minutes raises contact odds ~100× and qualification odds ~21×. Indian clinic campaigns report conversion collapsing when WhatsApp replies exceed ~5 minutes.',
+          'MIT/InsideSales research: contacting a web lead in 5 vs 30 minutes raises contact odds ~100× and qualification odds ~21×.',
         recommendation:
-          'Set a ≤5-minute first-response SLA, route all leads to a shared inbox, and use WhatsApp Business auto-ack + live follow-up.',
+          'Enforce a ≤5-minute first-response SLA with a shared inbox and WhatsApp auto-ack + live follow-up.',
         owner: 'Front office / marketing lead',
         source: 'marketing',
       },
       {
-        id: 'acq-missed-call',
-        text: 'Is there a documented missed-call / after-hours recovery workflow (callback list, WhatsApp reply, or IVR)?',
+        id: 'li-missed-call',
+        text: 'Is there a documented missed-call and after-hours recovery workflow?',
         severity: 'Critical',
+        controlArea: 'Missed-call recovery',
+        evidenceHint:
+          'Written SOP + last 7 days of missed-call log with callback outcomes.',
         explanation:
-          'Most healthcare searches still end in a phone call. Missed calls are a primary leak between paid/organic demand and booked appointments.',
+          'Most healthcare searches still end in a phone call; missed calls leak paid and organic demand.',
         recommendation:
-          'Log every missed call, auto-SMS/WhatsApp a callback link, and clear the list within one business hour.',
+          'Log every missed call, auto-SMS/WhatsApp a callback link, clear the list within one business hour.',
         owner: 'Front office lead',
         source: 'marketing',
       },
       {
-        id: 'acq-conversion',
-        text: 'Do you track enquiry → contacted → booked → attended conversion rates by channel?',
+        id: 'li-single-inbox',
+        text: 'Do all enquiry channels (phone, WhatsApp, web, Practo, Meta) feed one owned lead inbox or CRM?',
         severity: 'Critical',
-        explanation:
-          'Industry funnels often convert only ~11% of digital leads to patients. Stage-by-stage tracking shows where campaigns leak (contact, booking, or show-up).',
+        controlArea: 'Lead capture unification',
+        evidenceHint:
+          'Channel map showing where each lead lands and who owns it.',
         recommendation:
-          'Define the four funnel stages in your CRM/HMS and review conversion weekly by Google, Meta, WhatsApp, referral, and walk-in.',
-        owner: 'Marketing lead',
+          'Consolidate channels into one CRM/HMS queue with a named owner per shift.',
+        owner: 'Marketing / IT lead',
         source: 'marketing',
       },
       {
-        id: 'acq-call-scripts',
-        text: 'Are front-desk staff trained on a standard call/WhatsApp booking script with measured booking rates?',
+        id: 'li-scripts',
+        text: 'Are staff trained on a standard booking script with measured enquiry-to-book rates by agent?',
         severity: 'High',
-        explanation:
-          'Call-to-appointment conversion varies widely by staff member. Scripting and coaching close the gap between enquiry and booked visit.',
+        controlArea: 'Call / chat conversion',
+        evidenceHint:
+          'Script document + monthly booking-rate report by agent.',
         recommendation:
-          'Write a short booking script, role-play weekly, and track each agent’s enquiry-to-book rate.',
+          'Publish a short script, role-play weekly, coach the bottom quartile of agents.',
         owner: 'Front office lead',
         source: 'marketing',
       },
       {
-        id: 'acq-referral',
-        text: 'Are referral sources and campaign-to-appointment ROI measured?',
+        id: 'li-qualification',
+        text: 'Are leads scored or tagged (specialty, urgency, insurance/cash, location) before booking?',
         severity: 'High',
-        explanation:
-          'Untracked referrals and campaigns hide which relationships and spend actually produce patients.',
+        controlArea: 'Lead qualification',
+        evidenceHint:
+          'CRM fields and sample tagged lead records.',
         recommendation:
-          'Attribute each booking to a source and review cost-per-appointment monthly.',
+          'Add mandatory tags at first contact so routing and follow-up match patient need.',
         owner: 'Marketing lead',
         source: 'marketing',
       },
       {
-        id: 'acq-gbp',
-        text: 'Is your Google Business Profile complete (photos, services, hours, categories) and actively managed?',
-        severity: 'Critical',
-        explanation:
-          'Google Search + Maps and online reputation now drive the majority of new-patient discovery for most practices. Incomplete profiles rarely rank in the local map pack.',
-        recommendation:
-          'Complete every GBP field, add specialty photos weekly, and keep hours/services accurate.',
-        owner: 'Marketing lead',
-        source: 'marketing',
-      },
-      {
-        id: 'acq-directories',
-        text: 'Are doctor and clinic listings current on major discovery platforms (e.g. Practo, Justdial, Lybrate) with consistent NAP data?',
+        id: 'li-sla-report',
+        text: 'Is average first-response time reported weekly to leadership?',
         severity: 'Medium',
-        explanation:
-          'In India, patients discover hospitals across Google and healthcare directories. Inconsistent name/address/phone (NAP) hurts local SEO and trust.',
+        controlArea: 'SLA governance',
+        evidenceHint:
+          'Last 4 weekly response-time reports or dashboard screenshots.',
         recommendation:
-          'Audit top directories quarterly; match name, address, phone, and doctor profiles to your website.',
+          'Add median and P90 first-response time to the weekly marketing stand-up.',
         owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'li-duplicate',
+        text: 'Is duplicate-lead handling defined so the same patient is not worked by multiple staff?',
+        severity: 'Medium',
+        controlArea: 'Lead hygiene',
+        evidenceHint:
+          'Duplicate-merge rules and examples of merged records.',
+        recommendation:
+          'Match on phone/WhatsApp ID; assign a single owner; merge duplicates daily.',
+        owner: 'Front office / CRM owner',
+        source: 'marketing',
+      },
+    ],
+  },
+  {
+    id: 'funnel',
+    name: 'Funnel & conversion tracking',
+    description:
+      'Whether you can see enquiry → contact → book → attend → return as a managed funnel.',
+    objective:
+      'Verify stage-by-stage conversion is measured by channel and acted on when stages leak.',
+    icon: 'FN',
+    theme: 'marketing',
+    questions: [
+      {
+        id: 'fn-stages',
+        text: 'Do you track enquiry → contacted → booked → attended conversion by channel?',
+        severity: 'Critical',
+        controlArea: 'Funnel stages',
+        evidenceHint:
+          'Dashboard or spreadsheet with the four stages for the last 30–90 days by channel.',
+        explanation:
+          'Many health systems convert only ~11% of digital leads; stage tracking finds the biggest drop-off.',
+        recommendation:
+          'Define the four stages in CRM/HMS and review conversion weekly by channel.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'fn-source',
+        text: 'Is every booking attributed to a primary source (Google, Meta, WhatsApp, referral, walk-in, directory)?',
+        severity: 'Critical',
+        controlArea: 'Source attribution',
+        evidenceHint:
+          'Sample of 30 bookings with source fields completed.',
+        recommendation:
+          'Make source a mandatory field at booking; audit completeness weekly.',
+        owner: 'Front office / marketing',
+        source: 'marketing',
+      },
+      {
+        id: 'fn-call-track',
+        text: 'Do you use call or WhatsApp click tracking so phone bookings map back to campaigns?',
+        severity: 'High',
+        controlArea: 'Offline attribution',
+        evidenceHint:
+          'Tracking numbers / UTM WhatsApp links and a matching report.',
+        recommendation:
+          'Assign unique tracking numbers or UTM WhatsApp links per campaign.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'fn-dropoff',
+        text: 'When a funnel stage drops below target, is there an owner and a corrective action within 7 days?',
+        severity: 'High',
+        controlArea: 'Leak response',
+        evidenceHint:
+          'Example of a recent drop-off with action log.',
+        recommendation:
+          'Set stage targets; open a ticket when a stage misses target for two weeks.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'fn-show-rate',
+        text: 'Is appointment show-rate tracked separately from booking rate?',
+        severity: 'High',
+        controlArea: 'Show-rate control',
+        evidenceHint:
+          'Booked vs attended report for last month.',
+        recommendation:
+          'Report show-rate by specialty and channel; fix reminder/deposit gaps where show-rate is low.',
+        owner: 'Front office lead',
+        source: 'marketing',
+      },
+      {
+        id: 'fn-benchmark',
+        text: 'Have you set numeric targets for enquiry-to-book and book-to-attend (not just “improve”)?',
+        severity: 'Medium',
+        controlArea: 'Conversion targets',
+        evidenceHint:
+          'Written KPI sheet with targets and actuals.',
+        recommendation:
+          'Publish targets (e.g. ≥25% lead-to-book, ≥85% show-rate) and review monthly.',
+        owner: 'Owner / marketing lead',
         source: 'marketing',
       },
     ],
   },
   {
     id: 'campaigns',
-    name: 'Campaign performance & paid acquisition',
+    name: 'Campaign performance & paid media',
     description:
-      'Whether marketing campaigns are built, measured, and optimized the way high-performing clinics do — not run on guesswork.',
+      'How campaigns are designed, measured, and optimized — not run on guesswork.',
+    objective:
+      'Audit whether paid and organic campaigns use dedicated landing pages, PAC/LTV math, segmentation, and hygiene.',
     icon: 'CP',
     theme: 'marketing',
     questions: [
       {
         id: 'camp-landing',
-        text: 'Do paid or specialty campaigns land on dedicated service pages (not the generic homepage)?',
+        text: 'Do paid or specialty campaigns land on dedicated service pages (not the homepage)?',
         severity: 'Critical',
-        explanation:
-          'Homepages serve everyone and convert poorly. Proven campaigns use specialty landing pages with doctor profiles, conditions treated, insurance/cash info, and a clear book CTA.',
+        controlArea: 'Landing page design',
+        evidenceHint:
+          'URLs of active campaign landing pages with CTA screenshots.',
         recommendation:
-          'Create one landing page per specialty or campaign offer with a single primary CTA (call / WhatsApp / book).',
+          'One landing page per specialty/offer with doctor profile, proof, and a single primary CTA.',
         owner: 'Marketing lead',
         source: 'marketing',
       },
@@ -134,412 +234,988 @@ export const AUDIT_SECTIONS: AuditSection[] = [
         id: 'camp-pac',
         text: 'Do you calculate patient acquisition cost (PAC / CPA) by channel every month?',
         severity: 'Critical',
-        explanation:
-          'Practices that spend without PAC either under-invest or burn budget. Published benchmarks show PAC varies widely by specialty — only channel-level PAC reveals which campaigns are profitable.',
+        controlArea: 'PAC measurement',
+        evidenceHint:
+          'Last 3 monthly PAC tables by channel.',
         recommendation:
-          'Divide marketing spend by new patients attributed to each channel; review monthly and reallocate budget.',
-        owner: 'Marketing / finance lead',
+          'Divide spend by attributed new patients per channel; review and reallocate monthly.',
+        owner: 'Marketing / finance',
         source: 'marketing',
       },
       {
         id: 'camp-ltv',
-        text: 'Do you estimate patient lifetime value (LTV) and compare it to PAC before scaling spend?',
+        text: 'Do you estimate patient LTV and set a PAC ceiling before scaling spend?',
         severity: 'High',
-        explanation:
-          'HFMA and Kaufman Hall urge health systems to use LTV, retention, and share-of-wallet — not visit volume alone. A higher PAC can still be profitable if LTV is strong.',
+        controlArea: 'LTV vs PAC',
+        evidenceHint:
+          'LTV assumptions by specialty and documented PAC limits.',
         recommendation:
-          'Estimate average LTV by specialty (visits × margin over 1–3 years) and set a PAC ceiling (e.g. LTV ÷ 3 or better).',
-        owner: 'Owner / finance lead',
+          'Estimate LTV (visits × margin over 1–3 years) and keep PAC within an agreed multiple of LTV.',
+        owner: 'Owner / finance',
         source: 'marketing',
       },
       {
-        id: 'camp-call-tracking',
-        text: 'Do you use call tracking (or WhatsApp click tracking) so phone bookings are attributed to the right campaign?',
+        id: 'camp-segment',
+        text: 'Are campaigns segmented by specialty or intent rather than one generic hospital ad?',
         severity: 'High',
-        explanation:
-          'A large share of healthcare conversions still happen by phone. Without call tracking, Google/Meta ROI is understated and weak campaigns look strong.',
+        controlArea: 'Campaign segmentation',
+        evidenceHint:
+          'Ad account structure showing specialty campaigns.',
         recommendation:
-          'Add unique tracking numbers or UTM-tagged WhatsApp links per campaign and match them to bookings.',
-        owner: 'Marketing lead',
-        source: 'marketing',
-      },
-      {
-        id: 'camp-segmentation',
-        text: 'Are campaigns segmented by specialty or intent (e.g. cardiology vs orthopaedics) rather than one generic hospital ad?',
-        severity: 'High',
-        explanation:
-          'Patient journeys differ by specialty. Hyderabad and multi-specialty case studies show specialty-specific ads + landing pages lift bookings and lower cost per patient.',
-        recommendation:
-          'Split Google/Meta campaigns by specialty with matching keywords, creatives, and landing pages.',
+          'Split Google/Meta by specialty with matching keywords, creatives, and pages.',
         owner: 'Marketing lead',
         source: 'marketing',
       },
       {
         id: 'camp-hygiene',
-        text: 'Do you maintain negative keywords, exclude irrelevant searches, and pause underperforming ads on a fixed schedule?',
+        text: 'Do you review search terms / creatives weekly and pause underperformers?',
         severity: 'Medium',
-        explanation:
-          'Without campaign hygiene, budget leaks to irrelevant clicks. High-performing clinics review search terms and pause losers weekly.',
+        controlArea: 'Campaign hygiene',
+        evidenceHint:
+          'Weekly optimization checklist or change log.',
         recommendation:
-          'Weekly search-term review: add negatives, pause low-converting ads, and raise bids on proven terms.',
-        owner: 'Marketing lead / agency',
+          'Weekly search-term review: add negatives, pause losers, scale winners.',
+        owner: 'Marketing / agency',
         source: 'marketing',
       },
       {
-        id: 'camp-whatsapp-ads',
-        text: 'If you run digital ads in India, do you offer Click-to-WhatsApp (or equivalent low-friction chat) as a primary CTA?',
+        id: 'camp-whatsapp',
+        text: 'Do digital ads offer Click-to-WhatsApp or an equally low-friction chat CTA where relevant?',
         severity: 'Medium',
-        explanation:
-          'Indian patients often prefer messaging over web forms. Click-to-WhatsApp ads plus fast replies are a proven conversion path in hospital growth case studies.',
+        controlArea: 'Chat conversion path',
+        evidenceHint:
+          'Ad creatives / CTAs using WhatsApp or chat.',
         recommendation:
-          'Use WhatsApp as a campaign CTA with a ≤5-minute reply SLA and saved reply templates for common queries.',
+          'Use WhatsApp CTA with ≤5-minute reply SLA and saved reply templates.',
         owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'camp-creative',
+        text: 'Are ad creatives tested (A/B) with a documented winner before scaling budget?',
+        severity: 'Medium',
+        controlArea: 'Creative testing',
+        evidenceHint:
+          'A/B test log with results for last quarter.',
+        recommendation:
+          'Test one variable at a time; scale only creatives that beat baseline CPA.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'camp-compliance',
+        text: 'Do marketing claims and doctor promotions comply with applicable medical advertising rules?',
+        severity: 'High',
+        controlArea: 'Regulatory compliance',
+        evidenceHint:
+          'Approval checklist or legal/medical sign-off on recent campaigns.',
+        recommendation:
+          'Maintain a claim-approval checklist; avoid prohibited guarantees and unverified before/after claims.',
+        owner: 'Medical director / marketing',
+        source: 'marketing',
+      },
+    ],
+  },
+  {
+    id: 'local-seo',
+    name: 'Local SEO & discovery',
+    description:
+      'Visibility when patients search “near me”, by specialty, or by doctor name.',
+    objective:
+      'Confirm Google Business Profile, directories, and local SEO hygiene that drive map-pack and organic discovery.',
+    icon: 'LS',
+    theme: 'marketing',
+    questions: [
+      {
+        id: 'ls-gbp',
+        text: 'Is Google Business Profile complete (categories, services, hours, photos) and claimed for the facility?',
+        severity: 'Critical',
+        controlArea: 'GBP completeness',
+        evidenceHint:
+          'GBP dashboard screenshot + completeness checklist.',
+        recommendation:
+          'Complete every GBP field; add specialty photos weekly; keep hours accurate.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'ls-doctor-gbp',
+        text: 'Do key doctors have optimized Google / web profiles with specialty, photo, and booking link?',
+        severity: 'High',
+        controlArea: 'Doctor discoverability',
+        evidenceHint:
+          'List of doctor profiles with URLs and last update date.',
+        recommendation:
+          'Publish complete profiles per doctor with conditions treated and a booking CTA.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'ls-directories',
+        text: 'Are clinic and doctor listings consistent on major directories (Practo, Justdial, etc.) with matching NAP?',
+        severity: 'High',
+        controlArea: 'Citation / NAP consistency',
+        evidenceHint:
+          'NAP audit spreadsheet across top directories.',
+        recommendation:
+          'Quarterly directory audit; fix name/address/phone mismatches.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'ls-keywords',
+        text: 'Do you maintain a specialty keyword list and track rankings for priority local terms?',
+        severity: 'Medium',
+        controlArea: 'Local keyword tracking',
+        evidenceHint:
+          'Keyword list + ranking report for last month.',
+        recommendation:
+          'Track 20–40 priority “specialty + city” terms monthly and improve underperformers.',
+        owner: 'Marketing / SEO owner',
+        source: 'marketing',
+      },
+      {
+        id: 'ls-maps',
+        text: 'Is Google Maps / directions linked from the website, WhatsApp bio, and social profiles?',
+        severity: 'Medium',
+        controlArea: 'Directions friction',
+        evidenceHint:
+          'Links from site and social link-in-bio.',
+        recommendation:
+          'Put one-tap directions on every digital property.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'ls-photos',
+        text: 'Are facility and doctor photos updated regularly on GBP and the website?',
+        severity: 'Medium',
+        controlArea: 'Visual freshness',
+        evidenceHint:
+          'Date of last photo upload on GBP/website.',
+        recommendation:
+          'Upload new authentic photos at least monthly; avoid stock-only imagery.',
+        owner: 'Marketing / admin',
+        source: 'marketing',
+      },
+    ],
+  },
+  {
+    id: 'content',
+    name: 'Content & education marketing',
+    description:
+      'Trust-building content that educates patients and supports SEO and conversion.',
+    objective:
+      'Assess whether educational content, FAQs, and service pages systematically support the patient decision journey.',
+    icon: 'CT',
+    theme: 'marketing',
+    questions: [
+      {
+        id: 'ct-service-pages',
+        text: 'Does each major specialty have a dedicated service page covering symptoms, treatments, doctors, and CTA?',
+        severity: 'High',
+        controlArea: 'Service page depth',
+        evidenceHint:
+          'Inventory of specialty pages with last review date.',
+        recommendation:
+          'Build/refresh one specialty page per priority service with clear CTAs.',
+        owner: 'Marketing / clinical lead',
+        source: 'marketing',
+      },
+      {
+        id: 'ct-faq',
+        text: 'Do high-intent pages include FAQs that answer cost, insurance/TPA, prep, and recovery questions?',
+        severity: 'High',
+        controlArea: 'Objection handling content',
+        evidenceHint:
+          'Sample FAQs on top 3 specialty pages.',
+        recommendation:
+          'Add 6–10 FAQs per specialty using real front-desk questions.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'ct-cadence',
+        text: 'Is there a monthly content calendar (blogs, reels, WhatsApp tips) with owners and publish dates?',
+        severity: 'Medium',
+        controlArea: 'Content cadence',
+        evidenceHint:
+          'Current month content calendar.',
+        recommendation:
+          'Publish a simple monthly calendar; measure reach and enquiry contribution quarterly.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'ct-clinical-review',
+        text: 'Is clinical content medically reviewed before publish?',
+        severity: 'High',
+        controlArea: 'Clinical content governance',
+        evidenceHint:
+          'Sign-off log or reviewer initials on recent posts.',
+        recommendation:
+          'Require named clinician review for medical claims before go-live.',
+        owner: 'Medical director',
+        source: 'marketing',
+      },
+      {
+        id: 'ct-patient-lang',
+        text: 'Is patient-facing copy written in plain language (and local language where needed)?',
+        severity: 'Medium',
+        controlArea: 'Readability / language',
+        evidenceHint:
+          'Sample pages in local language or readability check notes.',
+        recommendation:
+          'Write at accessible reading level; offer Hindi/regional versions for key services.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'ct-testimonials',
+        text: 'Are consented testimonials / outcomes used on service pages (not only on a generic testimonials page)?',
+        severity: 'Medium',
+        controlArea: 'Proof placement',
+        evidenceHint:
+          'Service pages showing testimonials with consent records.',
+        recommendation:
+          'Place 1–2 relevant consented stories on each specialty page.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+    ],
+  },
+  {
+    id: 'referral',
+    name: 'Referral & community growth',
+    description:
+      'Word-of-mouth, doctor referrals, and community presence as systematic channels.',
+    objective:
+      'Verify referral programs and community activities are tracked like any other acquisition channel.',
+    icon: 'RF',
+    theme: 'marketing',
+    questions: [
+      {
+        id: 'rf-program',
+        text: 'Is there a formal patient or doctor referral program with tracking?',
+        severity: 'High',
+        controlArea: 'Referral program',
+        evidenceHint:
+          'Program description + referral volume last quarter.',
+        recommendation:
+          'Define referral ask, tracking code, and thank-you process; report monthly volume.',
+        owner: 'Marketing / medical admin',
+        source: 'marketing',
+      },
+      {
+        id: 'rf-gp-network',
+        text: 'Do you maintain an active referring GP / clinic network with regular communication?',
+        severity: 'High',
+        controlArea: 'B2B referral network',
+        evidenceHint:
+          'Referrer list + last outreach date.',
+        recommendation:
+          'Quarterly referrer visits or WhatsApp updates with easy booking path for referred patients.',
+        owner: 'Medical director / liaison',
+        source: 'marketing',
+      },
+      {
+        id: 'rf-events',
+        text: 'Do you run community health camps or awareness events with measured enquiry yield?',
+        severity: 'Medium',
+        controlArea: 'Community events ROI',
+        evidenceHint:
+          'Event list with cost and resulting bookings.',
+        recommendation:
+          'Cap event spend; capture leads on-site; follow up within 24 hours.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
+      {
+        id: 'rf-internal',
+        text: 'Are internal cross-specialty referrals tracked (e.g. medicine → diagnostics → surgery)?',
+        severity: 'Medium',
+        controlArea: 'Internal referral capture',
+        evidenceHint:
+          'Internal referral report between departments.',
+        recommendation:
+          'Track internal referrals and close the loop with appointment confirmation.',
+        owner: 'Clinical admin',
+        source: 'marketing',
+      },
+      {
+        id: 'rf-ask',
+        text: 'Are satisfied patients explicitly asked for referrals at discharge / checkout?',
+        severity: 'Medium',
+        controlArea: 'Referral ask process',
+        evidenceHint:
+          'Checkout script including referral ask.',
+        recommendation:
+          'Add a referral ask to the discharge checklist for promoters.',
+        owner: 'Front office lead',
         source: 'marketing',
       },
     ],
   },
   {
     id: 'retention',
-    name: 'Follow-up & retention systems',
+    name: 'Follow-up, recall & retention',
     description:
-      'Whether you move from visit-based care to structured long-term patient relationships — retention is usually cheaper than acquisition.',
+      'Systems that turn one visit into long-term care and lifetime value.',
+    objective:
+      'Audit reminders, chronic-care programs, recall campaigns, and retention/churn measurement.',
     icon: 'RT',
     theme: 'marketing',
     questions: [
       {
-        id: 'ret-chronic',
-        text: 'Do you run structured chronic-care programs (diabetes, hypertension, thyroid, asthma, cardiac)?',
-        severity: 'Critical',
-        explanation:
-          'Unstructured care plans lead to missed follow-ups and lost lifetime patient value.',
-        recommendation:
-          'Define recall intervals and care pathways for each chronic condition you treat.',
-        owner: 'Clinical lead',
-        source: 'marketing',
-      },
-      {
-        id: 'ret-progress',
-        text: 'Do you track patient progress over time — not just individual appointment dates?',
-        severity: 'High',
-        explanation:
-          'Without progress tracking, drop-offs go unnoticed until patients stop returning.',
-        recommendation:
-          'Review chronic panels on a schedule and flag patients who miss milestones.',
-        owner: 'Clinical lead',
-        source: 'marketing',
-      },
-      {
         id: 'ret-reminders',
-        text: 'Are appointment reminders sent automatically at least twice (e.g. ~72 hours and ~24 hours before)?',
+        text: 'Are appointment reminders automated at least twice (e.g. ~72h and ~24h before)?',
         severity: 'Critical',
-        explanation:
-          'Two-touch automated reminders (text + email/WhatsApp) typically cut no-show rates from the mid-teens toward ~8–12% in published practice playbooks.',
+        controlArea: 'Reminder automation',
+        evidenceHint:
+          'Reminder template schedule + sample message logs.',
         recommendation:
-          'Automate SMS/WhatsApp reminders at 72h and 24h (plus same-day if needed); enable easy reschedule.',
+          'Automate SMS/WhatsApp at 72h and 24h with easy reschedule link.',
         owner: 'Front office lead',
         source: 'marketing',
       },
       {
-        id: 'ret-bloodtest',
-        text: 'Are patients reminded about required blood tests or investigations before appointments?',
+        id: 'ret-previsit',
+        text: 'Are patients reminded of required labs / prep before appointments?',
         severity: 'High',
-        explanation:
-          'Patients who arrive unprepared delay care and often need repeat visits.',
+        controlArea: 'Pre-visit preparation',
+        evidenceHint:
+          'Pre-visit message templates by specialty.',
         recommendation:
-          'Send automated pre-visit instructions listing required tests and fasting rules.',
-        owner: 'Front office / lab desk',
+          'Send specialty-specific prep instructions automatically after booking.',
+        owner: 'Front office / clinical',
         source: 'marketing',
       },
       {
-        id: 'ret-noshow',
-        text: 'Do you measure no-show rate and run a recovery workflow for missed appointments?',
-        severity: 'High',
-        explanation:
-          'No-shows waste capacity. Best practice combines measurement, reminders, a clear cancellation policy, and same-day slots for reschedules.',
+        id: 'ret-chronic',
+        text: 'Do structured chronic-care programs exist (diabetes, HTN, thyroid, asthma, cardiac) with recall intervals?',
+        severity: 'Critical',
+        controlArea: 'Chronic care pathways',
+        evidenceHint:
+          'Written pathways with recall intervals and enrolled patient counts.',
         recommendation:
-          'Track no-show % monthly; auto-rebook missed visits and reserve same-day fill slots.',
-        owner: 'Front office lead',
+          'Define pathways and recall intervals; enroll eligible patients at diagnosis.',
+        owner: 'Clinical lead',
         source: 'marketing',
       },
       {
         id: 'ret-recall',
-        text: 'Do you run automated recall campaigns for annual check-ups, birthdays, or gap-in-care patients?',
+        text: 'Do you run automated recall for annual checks, birthdays, or gap-in-care patients?',
         severity: 'High',
-        explanation:
-          'Retention is typically far cheaper than acquisition. Playbooks treat recall and gap-in-care outreach as core acquisition levers — every retained patient also fuels referrals and reviews.',
+        controlArea: 'Recall campaigns',
+        evidenceHint:
+          'Last recall campaign report (sent, booked, attended).',
         recommendation:
-          'Segment the patient list for overdue visits and send scheduled WhatsApp/SMS recall campaigns.',
-        owner: 'Marketing / clinical lead',
+          'Segment overdue patients monthly; run WhatsApp/SMS recall with booking link.',
+        owner: 'Marketing / clinical',
+        source: 'marketing',
+      },
+      {
+        id: 'ret-noshow',
+        text: 'Is no-show rate measured with a recovery workflow for missed visits?',
+        severity: 'High',
+        controlArea: 'No-show recovery',
+        evidenceHint:
+          'No-show % report + rebooking SOP.',
+        recommendation:
+          'Track no-show monthly; auto-rebook; reserve same-day fill slots.',
+        owner: 'Front office lead',
         source: 'marketing',
       },
       {
         id: 'ret-churn',
-        text: 'Do you track patient retention / churn (e.g. % of patients with a return visit in 6–12 months)?',
+        text: 'Do you track 6- and 12-month patient retention / churn?',
         severity: 'High',
-        explanation:
-          'HFMA and Kaufman Hall highlight retention and share-of-wallet as consumer-centric metrics that visit volume alone cannot show.',
+        controlArea: 'Retention KPI',
+        evidenceHint:
+          'Retention dashboard or cohort table.',
         recommendation:
-          'Define “active patient” and report 6- and 12-month retention monthly; act on the top churn segments.',
-        owner: 'Owner / marketing lead',
+          'Define “active patient”; report retention monthly; act on high-churn segments.',
+        owner: 'Owner / marketing',
+        source: 'marketing',
+      },
+      {
+        id: 'ret-postvisit',
+        text: 'Is there a post-visit follow-up message (care tips, next step, feedback) within 48 hours?',
+        severity: 'Medium',
+        controlArea: 'Post-visit engagement',
+        evidenceHint:
+          'Post-visit message templates and send logs.',
+        recommendation:
+          'Automate a thank-you + care tip + feedback link within 48 hours of visit.',
+        owner: 'Front office / marketing',
+        source: 'marketing',
+      },
+      {
+        id: 'ret-lapsed',
+        text: 'Are lapsed patients (no visit in X months) systematically reactivated?',
+        severity: 'Medium',
+        controlArea: 'Lapsed patient win-back',
+        evidenceHint:
+          'Win-back campaign list and results.',
+        recommendation:
+          'Monthly win-back list for patients inactive 6–12 months with a relevant offer or check-up CTA.',
+        owner: 'Marketing lead',
         source: 'marketing',
       },
     ],
   },
+
+  // ─── BRAND PAGE ───────────────────────────────────────────────────
   {
     id: 'identity',
-    name: 'Clinic identity & visual brand',
+    name: 'Clinic identity & positioning',
     description:
-      'Step 1–2 of the branding plan: who you are and how you look to patients.',
+      'Who you are, who you serve, and why patients should choose you.',
+    objective:
+      'Confirm mission, ideal patient, and unique value proposition are documented and used consistently.',
     icon: 'ID',
     theme: 'branding',
     questions: [
       {
         id: 'id-mission',
-        text: 'Are your clinic mission, values, and ideal patient profile written and shared with staff?',
+        text: 'Are mission, values, and ideal patient profile written and shared with staff?',
         severity: 'High',
-        explanation:
-          'Without a defined identity, every team member communicates a different message.',
+        controlArea: 'Identity documentation',
+        evidenceHint:
+          'One-pager + proof of staff briefing (meeting notes / poster).',
         recommendation:
-          'Document mission, values, and ideal patient; brief all staff quarterly.',
-        owner: 'Medical director / owner',
+          'Document and brief all staff quarterly.',
+        owner: 'Owner / medical director',
         source: 'branding',
       },
       {
-        id: 'id-logo',
-        text: 'Do you have a consistent logo, colour palette, and typography used across all materials?',
+        id: 'id-uvp',
+        text: 'Is a clear unique value proposition stated above the fold on the website and in sales scripts?',
+        severity: 'Critical',
+        controlArea: 'Value proposition',
+        evidenceHint:
+          'Homepage screenshot + script excerpt with UVP.',
+        recommendation:
+          'Write one sentence on differentiation; place it on web, WhatsApp greeting, and call opening.',
+        owner: 'Marketing lead',
+        source: 'branding',
+      },
+      {
+        id: 'id-competitors',
+        text: 'Have you mapped 3–5 local competitors and how you differ on specialty, access, price, and trust?',
         severity: 'High',
-        explanation:
-          'Inconsistent visuals make a clinic look unprofessional and forgettable.',
+        controlArea: 'Competitive positioning',
+        evidenceHint:
+          'Competitor matrix dated within last 6 months.',
         recommendation:
-          'Create a one-page brand guide and audit all printed and digital touchpoints.',
-        owner: 'Owner / admin lead',
+          'Refresh a simple competitor matrix twice a year; use gaps to guide messaging.',
+        owner: 'Owner / marketing',
         source: 'branding',
       },
       {
-        id: 'id-signage',
-        text: 'Is clinic signage (exterior, reception, wayfinding) professional and on-brand?',
-        severity: 'Medium',
-        explanation: 'Signage is the first brand impression before a patient enters.',
+        id: 'id-audience',
+        text: 'Are primary audience segments defined (e.g. cash OPD, TPA, maternity, senior care)?',
+        severity: 'High',
+        controlArea: 'Audience segmentation',
+        evidenceHint:
+          'Segment definitions used in campaigns.',
         recommendation:
-          'Audit signage for clarity, lighting, and brand consistency.',
-        owner: 'Admin / facilities',
+          'Define 3–5 segments with message and channel preferences for each.',
+        owner: 'Marketing lead',
         source: 'branding',
       },
       {
-        id: 'id-materials',
-        text: 'Are prescriptions, ID cards, and patient education materials branded consistently?',
+        id: 'id-promise',
+        text: 'Are brand promises (wait times, response, cleanliness) realistic and monitored?',
         severity: 'Medium',
-        explanation:
-          'Every branded item reinforces trust and recall between visits.',
+        controlArea: 'Promise–delivery fit',
+        evidenceHint:
+          'Published promises vs operational metrics.',
         recommendation:
-          'Standardise templates for prescriptions, handouts, and staff ID.',
-        owner: 'Admin lead',
+          'Only publish promises you measure; fix ops before amplifying claims.',
+        owner: 'Ops / marketing',
+        source: 'branding',
+      },
+      {
+        id: 'id-staff-align',
+        text: 'Can frontline staff explain in one sentence why a patient should choose this hospital?',
+        severity: 'Medium',
+        controlArea: 'Staff brand alignment',
+        evidenceHint:
+          'Mystery-shop or spot-check notes from staff answers.',
+        recommendation:
+          'Train and quiz staff on the one-sentence brand pitch.',
+        owner: 'Front office lead',
         source: 'branding',
       },
     ],
   },
   {
-    id: 'online',
-    name: 'Brand message & online presence',
+    id: 'visual',
+    name: 'Visual & verbal identity',
     description:
-      'Step 3–4: clear messaging and a trusted digital front door that converts searchers into bookings.',
-    icon: 'ON',
+      'Logo, colours, typography, tone, and branded materials consistency.',
+    objective:
+      'Ensure brand assets and tone are standardized across every patient touchpoint.',
+    icon: 'VI',
     theme: 'branding',
     questions: [
       {
-        id: 'on-message',
-        text: 'Is your value proposition (why patients should choose you) clear on your website and social media?',
+        id: 'vi-guide',
+        text: 'Does a brand guide exist (logo, colours, fonts, do’s/don’ts) and is it used by vendors?',
         severity: 'High',
-        explanation:
-          'Patients compare clinics online before they call; vague messaging loses them.',
+        controlArea: 'Brand guide',
+        evidenceHint:
+          'Brand guide PDF + recent vendor deliverable using it.',
         recommendation:
-          'Write one sentence on what makes you different and place it above the fold.',
-        owner: 'Marketing lead',
+          'Create a one-page brand guide; require vendors to follow it.',
+        owner: 'Owner / admin',
         source: 'branding',
       },
       {
-        id: 'on-website',
-        text: 'Do you have a mobile-friendly website listing services, doctor profiles, timings, and location?',
-        severity: 'Critical',
-        explanation:
-          'Most healthcare searches happen on mobile. ~77% of people use search engines before booking a provider; a slow or thin site loses that intent.',
+        id: 'vi-signage',
+        text: 'Is exterior and interior signage professional, clear, and on-brand?',
+        severity: 'High',
+        controlArea: 'Physical signage',
+        evidenceHint:
+          'Photo audit of entrance, reception, wayfinding.',
         recommendation:
-          'Ensure the site loads fast on mobile with services, timings, maps, and click-to-call / WhatsApp.',
-        owner: 'Marketing lead',
+          'Fix unclear/outdated signage; align colours and naming.',
+        owner: 'Facilities / admin',
         source: 'branding',
       },
       {
-        id: 'on-booking',
-        text: 'Can patients book appointments online or via WhatsApp with minimal form fields?',
-        severity: 'Critical',
-        explanation:
-          'Roughly 60% of consumers prefer online booking where available. Reducing form fields (e.g. from many to a few) is a proven conversion lift.',
+        id: 'vi-print',
+        text: 'Are prescriptions, reports, ID cards, and handouts using consistent branding?',
+        severity: 'Medium',
+        controlArea: 'Print collateral',
+        evidenceHint:
+          'Sample pads/handouts compared to brand guide.',
         recommendation:
-          'Offer online or WhatsApp booking asking only for essentials; put the CTA on every page.',
+          'Standardize templates for all printed patient materials.',
+        owner: 'Admin lead',
+        source: 'branding',
+      },
+      {
+        id: 'vi-tone',
+        text: 'Is a brand tone guide (empathetic, professional, transparent, accessible, outcome-focused) trained?',
+        severity: 'Medium',
+        controlArea: 'Verbal tone',
+        evidenceHint:
+          'Tone guide + training attendance.',
+        recommendation:
+          'Train staff on tone pillars; spot-check calls and WhatsApp replies monthly.',
+        owner: 'Front office lead',
+        source: 'branding',
+      },
+      {
+        id: 'vi-uniform',
+        text: 'Do staff uniforms / name badges present a consistent professional image?',
+        severity: 'Medium',
+        controlArea: 'Staff presentation',
+        evidenceHint:
+          'Uniform policy + floor observation notes.',
+        recommendation:
+          'Enforce uniform and name-badge policy; replace worn items.',
+        owner: 'HR / admin',
+        source: 'branding',
+      },
+      {
+        id: 'vi-digital-assets',
+        text: 'Is there a shared library of approved logos, photos, and templates for marketing use?',
+        severity: 'Medium',
+        controlArea: 'Asset management',
+        evidenceHint:
+          'Drive/folder of approved assets with naming conventions.',
+        recommendation:
+          'Maintain a single approved asset library; retire outdated files.',
+        owner: 'Marketing lead',
+        source: 'branding',
+      },
+    ],
+  },
+  {
+    id: 'website',
+    name: 'Website & digital conversion',
+    description:
+      'Whether the website and digital properties convert intent into bookings.',
+    objective:
+      'Audit mobile experience, booking friction, CTAs, speed, and conversion paths.',
+    icon: 'WB',
+    theme: 'branding',
+    questions: [
+      {
+        id: 'wb-mobile',
+        text: 'Is the website fast and usable on mobile with services, doctors, timings, and location?',
+        severity: 'Critical',
+        controlArea: 'Mobile web experience',
+        evidenceHint:
+          'Mobile PageSpeed / load time + mobile screenshots of key pages.',
+        recommendation:
+          'Optimize mobile performance; put click-to-call and WhatsApp above the fold.',
+        owner: 'Marketing / web owner',
+        source: 'branding',
+      },
+      {
+        id: 'wb-booking',
+        text: 'Can patients book online or via WhatsApp with minimal form fields?',
+        severity: 'Critical',
+        controlArea: 'Booking friction',
+        evidenceHint:
+          'Booking flow screenshots showing field count.',
+        recommendation:
+          'Reduce forms to essentials; offer WhatsApp booking on every page.',
         owner: 'Front office / marketing',
         source: 'branding',
       },
       {
-        id: 'on-doctor-profiles',
-        text: 'Does each doctor have an optimized online profile (website + Google) with specialty, photo, and booking link?',
+        id: 'wb-cta',
+        text: 'Does every key page have a single clear primary CTA (Book / Call / WhatsApp)?',
         severity: 'High',
-        explanation:
-          'Patients search for named doctors and specialties. Hospital SEO case studies show doctor-profile SEO and individual Google listings drive qualified OPD enquiries.',
+        controlArea: 'CTA clarity',
+        evidenceHint:
+          'Audit of homepage + 5 specialty pages for CTA presence.',
         recommendation:
-          'Publish a complete profile per doctor with credentials, conditions treated, and a booking CTA.',
+          'Standardize one primary CTA style and placement site-wide.',
         owner: 'Marketing lead',
         source: 'branding',
       },
       {
-        id: 'on-tone',
-        text: 'Is patient communication empathetic, professional, transparent, and outcome-focused?',
-        severity: 'Medium',
-        explanation:
-          'Brand tone is felt in every call, message, and front-desk interaction.',
+        id: 'wb-hours',
+        text: 'Are timings, emergency info, and address accurate and identical across web, GBP, and directories?',
+        severity: 'High',
+        controlArea: 'Hours / NAP accuracy',
+        evidenceHint:
+          'Cross-check of hours/address on web vs GBP vs Practo.',
         recommendation:
-          'Train staff on the five tone pillars and spot-check calls monthly.',
-        owner: 'Front office lead',
+          'Quarterly NAP audit; fix mismatches the same day.',
+        owner: 'Admin / marketing',
+        source: 'branding',
+      },
+      {
+        id: 'wb-analytics',
+        text: 'Is website analytics installed with goals for calls, form submits, and WhatsApp clicks?',
+        severity: 'High',
+        controlArea: 'Web analytics',
+        evidenceHint:
+          'Analytics property + conversion events configured.',
+        recommendation:
+          'Track calls, forms, WhatsApp clicks as goals; review monthly.',
+        owner: 'Marketing lead',
+        source: 'branding',
+      },
+      {
+        id: 'wb-trust',
+        text: 'Do trust signals appear near CTAs (accreditation, years, doctor credentials, review rating)?',
+        severity: 'Medium',
+        controlArea: 'Trust near conversion',
+        evidenceHint:
+          'Screenshots of CTA areas with trust elements.',
+        recommendation:
+          'Place rating, credentials, and accreditations next to booking CTAs.',
+        owner: 'Marketing lead',
+        source: 'branding',
+      },
+      {
+        id: 'wb-404',
+        text: 'Are broken links, outdated doctor pages, and 404s reviewed at least quarterly?',
+        severity: 'Medium',
+        controlArea: 'Site hygiene',
+        evidenceHint:
+          'Last crawl/QA report.',
+        recommendation:
+          'Quarterly site crawl; fix 404s and outdated profiles within 2 weeks.',
+        owner: 'Marketing / web owner',
         source: 'branding',
       },
     ],
   },
   {
     id: 'experience',
-    name: 'Patient experience & social proof',
+    name: 'Patient experience journey',
     description:
-      'Step 5–6: the in-clinic experience and trust signals that turn patients into reviews and referrals.',
+      'The end-to-end experience from enquiry to discharge that shapes brand perception.',
+    objective:
+      'Evaluate access, wait times, communication clarity, and journey consistency.',
     icon: 'EX',
     theme: 'branding',
     questions: [
       {
-        id: 'ex-appointments',
-        text: 'Is the appointment process easy (short hold times, clear next steps, minimal paperwork)?',
+        id: 'ex-access',
+        text: 'Is booking easy (short hold times, clear next steps, minimal paperwork)?',
         severity: 'High',
-        explanation:
-          'Friction at booking or registration drives patients to competitors.',
+        controlArea: 'Access friction',
+        evidenceHint:
+          'Average hold time + patient journey map.',
         recommendation:
-          'Map the patient journey and remove one friction point per month.',
+          'Map the journey; remove one friction point per month.',
         owner: 'Front office lead',
         source: 'branding',
       },
       {
         id: 'ex-wait',
-        text: 'Are wait times monitored and managed to avoid patients leaving without being seen?',
+        text: 'Are wait times monitored with actions when thresholds are breached?',
         severity: 'High',
-        explanation:
-          'Long waits damage reputation and reduce return visits.',
+        controlArea: 'Wait-time management',
+        evidenceHint:
+          'Wait-time report + escalation rule.',
         recommendation:
-          'Display expected wait times and track walkouts weekly.',
+          'Display expected waits; escalate when average wait exceeds target.',
         owner: 'OPD manager',
         source: 'branding',
       },
       {
-        id: 'ex-reviews',
-        text: 'Do you systematically request Google reviews after visits and respond to every review within 24–48 hours?',
+        id: 'ex-comms',
+        text: 'Do patients receive clear communication on cost estimates, next steps, and who to contact?',
         severity: 'Critical',
-        explanation:
-          '70%+ of patients consult reviews before choosing a provider; 79% expect a response within 24 hours. Review quantity, recency, and rating heavily influence map-pack ranking.',
+        controlArea: 'Care communication',
+        evidenceHint:
+          'Sample estimate sheets and next-step messages.',
         recommendation:
-          'Automate a post-visit review invite (WhatsApp/SMS) and reply to all reviews within 48 hours.',
+          'Standardize estimate + next-step templates for common visits/procedures.',
+        owner: 'Billing / clinical admin',
+        source: 'branding',
+      },
+      {
+        id: 'ex-complaint',
+        text: 'Is there a documented complaint / service-recovery process with response SLAs?',
+        severity: 'High',
+        controlArea: 'Service recovery',
+        evidenceHint:
+          'Complaint log with open/close times.',
+        recommendation:
+          'Log every complaint; respond within 24–48 hours; close with root cause.',
+        owner: 'Quality / admin',
+        source: 'branding',
+      },
+      {
+        id: 'ex-mystery',
+        text: 'Do you mystery-shop or audit the patient journey (call, WhatsApp, visit) at least quarterly?',
+        severity: 'Medium',
+        controlArea: 'Journey audit',
+        evidenceHint:
+          'Last mystery-shop report.',
+        recommendation:
+          'Quarterly mystery shop of call + WhatsApp + OPD; assign fixes with owners.',
+        owner: 'Quality / marketing',
+        source: 'branding',
+      },
+      {
+        id: 'ex-billing-clarity',
+        text: 'Are bills and packages explained in plain language before major services?',
+        severity: 'High',
+        controlArea: 'Billing transparency',
+        evidenceHint:
+          'Consented estimate samples and package sheets.',
+        recommendation:
+          'Mandatory estimate discussion checklist before elective procedures.',
+        owner: 'Billing lead',
+        source: 'branding',
+      },
+      {
+        id: 'ex-privacy',
+        text: 'Is patient privacy respected in reception conversations and digital messaging?',
+        severity: 'High',
+        controlArea: 'Privacy in brand moments',
+        evidenceHint:
+          'Privacy SOP + observation notes.',
+        recommendation:
+          'Train staff on privacy at desk and on WhatsApp; use private spaces for sensitive talks.',
+        owner: 'Admin / compliance',
+        source: 'branding',
+      },
+    ],
+  },
+  {
+    id: 'reputation',
+    name: 'Reviews, reputation & social proof',
+    description:
+      'How reviews and stories are generated, managed, and turned into trust.',
+    objective:
+      'Confirm review generation, response SLAs, NPS routing, and story governance.',
+    icon: 'RP',
+    theme: 'branding',
+    questions: [
+      {
+        id: 'rp-request',
+        text: 'Are Google review requests systematically sent after visits?',
+        severity: 'Critical',
+        controlArea: 'Review generation',
+        evidenceHint:
+          'Automation config + monthly new-review count.',
+        recommendation:
+          'Automate post-visit review invites via WhatsApp/SMS.',
         owner: 'Marketing lead',
         source: 'branding',
       },
       {
-        id: 'ex-review-timing',
-        text: 'Are review requests sent soon after a positive visit (e.g. within ~2 hours) while satisfaction is highest?',
+        id: 'rp-timing',
+        text: 'Are review requests sent while satisfaction is highest (e.g. within ~2 hours of a positive visit)?',
         severity: 'High',
-        explanation:
-          'Hyderabad and multi-specialty hospital case studies show post-visit SMS/WhatsApp review requests within hours drive high review velocity (e.g. 15–20+/week).',
+        controlArea: 'Review timing',
+        evidenceHint:
+          'Trigger timing settings from HMS/automation.',
         recommendation:
-          'Trigger review invites from HMS discharge/OPD checkout within 2 hours for satisfied patients.',
+          'Trigger invites from checkout/discharge within 2 hours for eligible patients.',
         owner: 'Marketing / front office',
         source: 'branding',
       },
       {
-        id: 'ex-nps',
-        text: 'Do you run a short satisfaction / NPS survey before asking for a public Google review?',
-        severity: 'High',
+        id: 'rp-response',
+        text: 'Is every review responded to within 24–48 hours?',
+        severity: 'Critical',
+        controlArea: 'Review response SLA',
+        evidenceHint:
+          'Review reply log with timestamps.',
         explanation:
-          'Practice playbooks use private feedback first: promoters get a review link; detractors are routed to recovery so issues are fixed before a public complaint.',
+          'Patients expect responses quickly; unreplied reviews signal neglect.',
         recommendation:
-          'Send a 1-question NPS; route 9–10 to Google review, 0–6 to a service recovery owner.',
-        owner: 'Marketing / quality lead',
+          'Assign a daily review owner; use templates; escalate negatives to recovery.',
+        owner: 'Marketing lead',
         source: 'branding',
       },
       {
-        id: 'ex-stories',
-        text: 'Do you share real patient stories or outcomes (with consent) on social media or your website?',
-        severity: 'Medium',
-        explanation:
-          'Stories and physician-authored content lift mid-funnel trust more than generic ads.',
+        id: 'rp-nps',
+        text: 'Do you run a private NPS/satisfaction survey before asking for a public review?',
+        severity: 'High',
+        controlArea: 'NPS routing',
+        evidenceHint:
+          'Survey flow: promoters → review link; detractors → recovery.',
         recommendation:
-          'Collect one consented success story per month for social and web.',
+          'Route 9–10 to Google review; 0–6 to a named recovery owner.',
+        owner: 'Quality / marketing',
+        source: 'branding',
+      },
+      {
+        id: 'rp-negative',
+        text: 'Are negative reviews triaged with root-cause fix — not only a public reply?',
+        severity: 'High',
+        controlArea: 'Negative-review process',
+        evidenceHint:
+          'Sample negative reviews with internal tickets.',
+        recommendation:
+          'Open an internal ticket for every 1–2★ review; close with corrective action.',
+        owner: 'Quality lead',
+        source: 'branding',
+      },
+      {
+        id: 'rp-stories',
+        text: 'Are consented patient stories published regularly on web/social?',
+        severity: 'Medium',
+        controlArea: 'Story pipeline',
+        evidenceHint:
+          'Consent forms + last 3 published stories.',
+        recommendation:
+          'Collect one consented story per month; place on relevant specialty pages.',
+        owner: 'Marketing lead',
+        source: 'branding',
+      },
+      {
+        id: 'rp-rating-goal',
+        text: 'Do you have a target rating and monthly review-volume goal?',
+        severity: 'Medium',
+        controlArea: 'Reputation KPIs',
+        evidenceHint:
+          'Written targets vs actual rating/volume.',
+        recommendation:
+          'Set targets (e.g. ≥4.5★, N new reviews/month) and track on the marketing dashboard.',
         owner: 'Marketing lead',
         source: 'branding',
       },
     ],
   },
   {
-    id: 'growth',
-    name: 'Growth, measurement & accreditation',
+    id: 'governance',
+    name: 'Measurement, governance & growth',
     description:
-      'Step 7: measure what matters (including campaign ROI) and earn trust through quality standards.',
-    icon: 'GR',
+      'Leadership rhythm that turns audit findings into budget and operational change.',
+    objective:
+      'Verify dashboards, budget reallocation, brand audits, and quality/accreditation readiness.',
+    icon: 'GV',
     theme: 'branding',
     questions: [
       {
-        id: 'gr-metrics',
-        text: 'Do you track a monthly marketing dashboard (enquiries, bookings, PAC, no-shows, reviews, retention)?',
+        id: 'gv-dashboard',
+        text: 'Is there a monthly marketing & brand dashboard (enquiries, PAC, bookings, reviews, retention)?',
         severity: 'Critical',
-        explanation:
-          'Data-driven clinics reallocate spend to channels that produce patients. Guesswork campaigns cannot prove ROI.',
+        controlArea: 'Executive dashboard',
+        evidenceHint:
+          'Last 3 monthly dashboards.',
         recommendation:
-          'Publish a one-page monthly dashboard with acquisition, conversion, reputation, and retention KPIs.',
-        owner: 'Owner / marketing lead',
+          'Publish a one-page monthly dashboard to leadership.',
+        owner: 'Owner / marketing',
         source: 'branding',
       },
       {
-        id: 'gr-reallocate',
-        text: 'Do you reallocate marketing budget quarterly based on PAC and conversion data (not only ad impressions)?',
+        id: 'gv-reallocate',
+        text: 'Is marketing budget reallocated quarterly based on PAC and conversion — not impressions alone?',
         severity: 'High',
-        explanation:
-          'Playbooks treat PAC analysis and channel reallocation as a recurring operating rhythm — not a one-time campaign launch.',
+        controlArea: 'Budget governance',
+        evidenceHint:
+          'Quarterly budget change memo tied to PAC data.',
         recommendation:
-          'Each quarter, cut the bottom-performing channel and scale the top performer within PAC limits.',
-        owner: 'Owner / marketing lead',
+          'Cut bottom channel; scale top channel within PAC limits each quarter.',
+        owner: 'Owner / marketing',
         source: 'branding',
       },
       {
-        id: 'gr-touchpoints',
-        text: 'Are all eight brand touchpoints consistent (signage, website, prescriptions, reception, staff, communication, social, follow-up)?',
+        id: 'gv-touchpoints',
+        text: 'Are brand touchpoints (signage, web, prescriptions, reception, staff, comms, social, follow-up) audited quarterly?',
         severity: 'High',
-        explanation:
-          'Inconsistency across touchpoints erodes the brand you invest in elsewhere.',
+        controlArea: 'Touchpoint audit',
+        evidenceHint:
+          'Touchpoint checklist with last audit date.',
         recommendation:
-          'Audit all eight touchpoints quarterly against your brand guide.',
-        owner: 'Admin / marketing lead',
+          'Run an 8-touchpoint brand audit every quarter with owners for gaps.',
+        owner: 'Admin / marketing',
         source: 'branding',
       },
       {
-        id: 'gr-improve',
-        text: 'Do you run a structured quarterly review to improve marketing and patient experience?',
+        id: 'gv-review-meeting',
+        text: 'Is there a structured quarterly marketing & experience review with assigned actions?',
         severity: 'Medium',
-        explanation:
-          'Continuous improvement separates growing clinics from stagnant ones.',
+        controlArea: 'Governance rhythm',
+        evidenceHint:
+          'Meeting minutes with action owners.',
         recommendation:
-          'Hold a quarterly brand and marketing review with action owners assigned.',
+          'Hold a quarterly review; track actions to closure.',
         owner: 'Owner',
         source: 'branding',
       },
       {
-        id: 'gr-accreditation',
-        text: 'Have you assessed clinic accreditation readiness (quality standards, documentation, processes)?',
+        id: 'gv-roles',
+        text: 'Are marketing, front-office, and clinical brand roles clearly assigned (RACI)?',
         severity: 'Medium',
-        explanation:
-          'Accreditation signals trust and differentiates your clinic in a crowded market.',
+        controlArea: 'Role clarity',
+        evidenceHint:
+          'RACI or responsibility list.',
         recommendation:
-          'Run a gap analysis against recognized clinic accreditation / quality standards.',
-        owner: 'Medical director / quality lead',
+          'Publish a simple RACI for leads, reviews, content, and campaigns.',
+        owner: 'Owner / HR',
+        source: 'branding',
+      },
+      {
+        id: 'gv-accreditation',
+        text: 'Have you assessed accreditation / quality-standard readiness (documentation, processes, gaps)?',
+        severity: 'Medium',
+        controlArea: 'Quality / accreditation readiness',
+        evidenceHint:
+          'Gap analysis report dated within 12 months.',
+        recommendation:
+          'Run a gap analysis against recognized clinic quality standards; close critical gaps.',
+        owner: 'Medical director / quality',
+        source: 'branding',
+      },
+      {
+        id: 'gv-training',
+        text: 'Is brand and patient-communication training part of new-hire onboarding?',
+        severity: 'Medium',
+        controlArea: 'Onboarding training',
+        evidenceHint:
+          'Onboarding checklist including brand module.',
+        recommendation:
+          'Add brand pitch, tone, and review/referral asks to onboarding.',
+        owner: 'HR / front office',
         source: 'branding',
       },
     ],

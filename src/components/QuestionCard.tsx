@@ -18,14 +18,11 @@ export default function QuestionCard({
     <article className="question-card">
       <header className="question-card__header">
         <span className="question-card__number">Q{index}</span>
-        <span
-          className={`badge badge--${question.severity.toLowerCase()}`}
-        >
+        <span className={`badge badge--${question.severity.toLowerCase()}`}>
           {question.severity}
         </span>
-        <span
-          className={`theme-tag theme-tag--${question.source}`}
-        >
+        <span className="control-chip">{question.controlArea}</span>
+        <span className={`theme-tag theme-tag--${question.source}`}>
           {question.source === 'marketing' ? 'Marketing' : 'Brand'}
         </span>
       </header>
@@ -33,6 +30,9 @@ export default function QuestionCard({
       {question.explanation && (
         <p className="question-card__explanation">{question.explanation}</p>
       )}
+      <div className="question-card__evidence">
+        <strong>Evidence to check:</strong> {question.evidenceHint}
+      </div>
       <div className="answer-options" role="group" aria-label="Answer options">
         {ANSWER_ORDER.map((value) => {
           const selected = response?.answer === value;
@@ -52,16 +52,17 @@ export default function QuestionCard({
         })}
       </div>
       <label className="question-card__note">
-        <span>Notes (optional)</span>
+        <span>Auditor notes / evidence location (optional)</span>
         <textarea
           value={response?.note ?? ''}
-          placeholder="Local context or evidence location"
+          placeholder="e.g. CRM report 12 Mar · Shared Drive / Marketing / SLA.xlsx"
           onChange={(e) =>
             onChange(response?.answer ?? 'partial', e.target.value)
           }
           disabled={!response?.answer}
         />
       </label>
+      <p className="question-card__owner">Owner: {question.owner}</p>
     </article>
   );
 }

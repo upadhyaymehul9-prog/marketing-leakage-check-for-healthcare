@@ -99,6 +99,7 @@ function buildActions(
         questionId: q.id,
         sectionName: section.name,
         severity: q.severity,
+        controlArea: q.controlArea,
         answer: answer ?? 'unanswered',
         text: q.text,
         recommendation: q.recommendation,
