@@ -22,7 +22,7 @@ Tech: Vite + React 18 + TypeScript. No backend.
 
 ### Key files
 
-- `src/data/audit.ts` — 6 sections, ~25 questions from both infographics
+- `src/data/audit.ts` — 7 sections (~40 questions): BookMyClinics infographics + proven campaign practices
 - `src/lib/scoring.ts` — health bands: Strong / Developing / At Risk / Critical
 - `src/components/` — AuditShell, QuestionCard, Report
 
@@ -30,3 +30,4 @@ Tech: Vite + React 18 + TypeScript. No backend.
 
 - This is a **self-assessment questionnaire**, not static marketing landing pages.
 - `docs/superpowers/` describes an older revenue-leakage audit — ignore it; the product vision is the BookMyClinics health check.
+- Campaign questions cite industry research in explanations (MIT/InsideSales lead response, HFMA/Kaufman Hall LTV/retention, Google review/local SEO practices, India WhatsApp/GBP case studies). Do not invent unverified statistics when editing questions.

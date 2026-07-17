@@ -29,7 +29,7 @@ test('selecting an answer updates section completion', async () => {
   const item = screen.getByRole('button', {
     name: /Patient acquisition & marketing/i,
   });
-  expect(within(item).getByText(/1\/4/)).toBeInTheDocument();
+  expect(within(item).getByText(/1\/7/)).toBeInTheDocument();
 });
 
 test('report shows marketing and brand health scores', async () => {
