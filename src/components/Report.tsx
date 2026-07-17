@@ -1,4 +1,10 @@
-import type { AuditResult, ConfidenceLevel, HealthBand, Phase } from '../types';
+import type {
+  AnswerValue,
+  AuditResult,
+  ConfidenceLevel,
+  HealthBand,
+  Phase,
+} from '../types';
 import { getQuestionHowTo } from '../data/questionHowTo';
 
 interface ReportProps {
@@ -23,6 +29,15 @@ const CONFIDENCE_DESC: Record<ConfidenceLevel, string> = {
   High: '90%+ of questions answered — the health bands above reflect your full picture.',
   Medium: '60–89% answered — answer more questions to firm up the health bands above.',
   Low: 'Under 60% answered — treat the health bands above as a rough first look, not a verdict.',
+};
+
+const ACTION_STATUS: Record<AnswerValue | 'unanswered', { label: string; tone: 'gap' | 'unassessed' }> = {
+  unanswered: { label: 'Not yet assessed', tone: 'unassessed' },
+  undocumented: { label: 'Marked: Yes, not documented', tone: 'gap' },
+  partial: { label: 'Marked: Partial', tone: 'gap' },
+  no: { label: 'Marked: No', tone: 'gap' },
+  evidence: { label: 'Marked: Yes, with evidence', tone: 'gap' },
+  na: { label: 'Marked: Not applicable', tone: 'gap' },
 };
 
 export default function Report({ result, onBack }: ReportProps) {
@@ -150,6 +165,7 @@ export default function Report({ result, onBack }: ReportProps) {
           <ol className="report__actions">
             {result.actions.slice(0, 12).map((a) => {
               const howTo = getQuestionHowTo(a.questionId, a.recommendation);
+              const status = ACTION_STATUS[a.answer];
               return (
               <li key={a.questionId} className="action-item">
                 <div className="action-item__head">
@@ -158,6 +174,9 @@ export default function Report({ result, onBack }: ReportProps) {
                   </span>
                   <span className="control-chip">{a.controlArea}</span>
                   <span className="action-item__section">{a.sectionName}</span>
+                  <span className={`status-tag status-tag--${status.tone}`}>
+                    {status.label}
+                  </span>
                 </div>
                 <p className="action-item__text">{a.text}</p>
                 <div className="action-item__howto">
