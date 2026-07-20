@@ -110,29 +110,7 @@ export default function AuditShell({
 
       <div className="audit-body">
         <nav className="sidebar" aria-label="Audit sections">
-          {sections.map((section) => {
-            const m = meta.get(section.id);
-            const active = section.id === activeSectionId;
-            return (
-              <button
-                key={section.id}
-                type="button"
-                className={`sidebar__item ${active ? 'is-active' : ''}`}
-                aria-current={active ? 'true' : undefined}
-                onClick={() => onSelect(section.id)}
-              >
-                <span className="sidebar__icon">{section.icon}</span>
-                <span className="sidebar__label">{section.name}</span>
-                <span className="sidebar__count">
-                  {m?.answered ?? 0}/{m?.total ?? section.questions.length}
-                </span>
-              </button>
-            );
-          })}
-
-          <div className="sidebar__group sidebar__group--divider">
-            Switch audit
-          </div>
+          <div className="sidebar__group">Switch audit</div>
           <div className="mode-switch" role="group" aria-label="Audit pages">
             <button
               type="button"
@@ -165,6 +143,27 @@ export default function AuditShell({
               </span>
             </button>
           </div>
+
+          <div className="sidebar__group sidebar__group--divider">Sections</div>
+          {sections.map((section) => {
+            const m = meta.get(section.id);
+            const active = section.id === activeSectionId;
+            return (
+              <button
+                key={section.id}
+                type="button"
+                className={`sidebar__item ${active ? 'is-active' : ''}`}
+                aria-current={active ? 'true' : undefined}
+                onClick={() => onSelect(section.id)}
+              >
+                <span className="sidebar__icon">{section.icon}</span>
+                <span className="sidebar__label">{section.name}</span>
+                <span className="sidebar__count">
+                  {m?.answered ?? 0}/{m?.total ?? section.questions.length}
+                </span>
+              </button>
+            );
+          })}
         </nav>
 
         <main className="audit-content">{children}</main>
