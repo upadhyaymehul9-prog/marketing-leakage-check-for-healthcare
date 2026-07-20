@@ -57,7 +57,7 @@ test('selecting an answer updates section completion', async () => {
   const item = screen.getByRole('button', {
     name: /Digital presence foundation/i,
   });
-  expect(within(item).getByText(/1\/6/)).toBeInTheDocument();
+  expect(within(item).getByText(/1\/7/)).toBeInTheDocument();
 });
 
 test('first question asks about digital presence', () => {

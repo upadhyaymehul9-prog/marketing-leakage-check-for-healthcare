@@ -89,6 +89,19 @@ export const QUESTION_HOW_TO: Record<string, QuestionHowTo> = {
       "If stuck: start manual (WhatsApp + Excel) this week, then automate after the process works for 14 days.",
     ],
   },
+  'dp-domain-renewal': {
+    summary: "Enable autopay with a valid card on file, or set a calendar reminder at least 30 days before domain/hosting expiry with a named owner.",
+    steps: [
+      "Who owns this: assign Marketing / IT lead as the accountable person and put a due date on the calendar (usually 7–30 days).",
+      "Gather baseline evidence first: Registrar/hosting invoice showing autopay enabled, or a calendar reminder set at least 30 days before expiry.",
+      "Log in to your domain registrar and hosting/website provider; note the exact expiry date for each.",
+      "Turn on autopay with a valid, non-expiring card, or add a shared calendar reminder 30+ days before each expiry.",
+      "Name one accountable owner (not \"whoever built the site\") who receives the renewal reminder.",
+      "Check that the registrar/hosting account email is a monitored inbox, not a former employee's personal address.",
+      "Done when: you can show the evidence (“Registrar/hosting invoice showing autopay enabled, or a calendar reminder set at least 30 days before expiry.”) to another person without hunting through chats.",
+      "If stuck: at minimum, write the domain/hosting expiry dates and provider login on a shared sheet this week.",
+    ],
+  },
   'li-five-min': {
     summary: "Enforce a ≤5-minute first-response SLA with a shared inbox and WhatsApp auto-ack + live follow-up.",
     steps: [
@@ -346,6 +359,19 @@ export const QUESTION_HOW_TO: Record<string, QuestionHowTo> = {
       "If stuck: start manual (WhatsApp + Excel) this week, then automate after the process works for 14 days.",
     ],
   },
+  'camp-sms-compliance': {
+    summary: "Register your entity and templates on the telecom DLT platform; send promotional SMS/WhatsApp only to opted-in numbers; honor opt-out requests immediately.",
+    steps: [
+      "Who owns this: assign Marketing lead as the accountable person and put a due date on the calendar (usually 7–30 days).",
+      "Gather baseline evidence first: DLT registration certificate/entity ID and an opt-in/opt-out log for promotional sends.",
+      "Register your business entity on the telecom DLT platform (via your SMS/WhatsApp provider) and register each promotional template.",
+      "Check every number on your promotional list against the DND registry before sending, or use a provider that filters this automatically.",
+      "Capture explicit opt-in at the point of collection (form checkbox, WhatsApp opt-in message) and log it.",
+      "Add a working STOP/opt-out keyword; remove opted-out numbers within 24 hours.",
+      "Done when: you can show the evidence (“DLT registration certificate/entity ID and an opt-in/opt-out log for promotional sends.”) to another person without hunting through chats.",
+      "If stuck: pause promotional SMS/WhatsApp broadcasts until DLT registration is confirmed — transactional/appointment messages are a separate, already-compliant category.",
+    ],
+  },
   'ls-gbp': {
     summary: "Complete every GBP field; add specialty photos weekly; keep hours accurate.",
     steps: [
@@ -485,6 +511,19 @@ export const QUESTION_HOW_TO: Record<string, QuestionHowTo> = {
       "If stuck: start manual (WhatsApp + Excel) this week, then automate after the process works for 14 days.",
     ],
   },
+  'ct-social-media': {
+    summary: "Assign an owner to post weekly and reply to DMs/comments within 24 hours; fix or archive inactive profiles.",
+    steps: [
+      "Who owns this: assign Marketing lead as the accountable person and put a due date on the calendar (usually 7–30 days).",
+      "Gather baseline evidence first: Post history from the last 30 days plus average DM/comment reply time.",
+      "Audit every social profile (Instagram, Facebook, YouTube): last post date, follower count, and whether it links back to your real hospital.",
+      "Assign one owner and a minimum weekly posting cadence (reuse the content calendar from the Content section).",
+      "Turn on notifications for DMs/comments; set a 24-hour reply SLA and log actual reply times weekly.",
+      "Archive or clearly rebrand any long-abandoned profile that could confuse patients about which account is official.",
+      "Done when: you can show the evidence (“Post history from the last 30 days plus average DM/comment reply time.”) to another person without hunting through chats.",
+      "If stuck: start with one platform (usually Instagram or Facebook) done well before expanding to others.",
+    ],
+  },
   'rf-program': {
     summary: "Define referral ask, tracking code, and thank-you process; report monthly volume.",
     steps: [
@@ -542,6 +581,19 @@ export const QUESTION_HOW_TO: Record<string, QuestionHowTo> = {
       "Add a referral ask to checkout for happy patients with a forwardable WhatsApp text.",
       "Done when: you can show the evidence (“Checkout script including referral ask.”) to another person without hunting through chats.",
       "If stuck: start manual (WhatsApp + Excel) this week, then automate after the process works for 14 days.",
+    ],
+  },
+  'rf-corporate': {
+    summary: "Maintain an empanelment/tie-up list with a named owner; track enquiries and bookings from each corporate/TPA source monthly.",
+    steps: [
+      "Who owns this: assign Owner / marketing as the accountable person and put a due date on the calendar (usually 7–30 days).",
+      "Gather baseline evidence first: List of empanelled TPAs/insurers or corporate tie-ups with enquiry/booking volume attributed to each.",
+      "List every TPA/insurer you are empanelled with and every corporate wellness tie-up, active or lapsed.",
+      "Tag each as a source in your CRM/HMS the same way you tag Google, Meta, or referral leads.",
+      "Assign one owner to maintain the relationships and renew empanelment paperwork before it lapses.",
+      "Report monthly enquiry and booking volume per corporate/TPA source alongside your other channels.",
+      "Done when: you can show the evidence (“List of empanelled TPAs/insurers or corporate tie-ups with enquiry/booking volume attributed to each.”) to another person without hunting through chats.",
+      "If stuck: start with a simple spreadsheet listing every TPA/corporate contact and renewal date this week.",
     ],
   },
   'ret-reminders': {
@@ -1008,6 +1060,19 @@ export const QUESTION_HOW_TO: Record<string, QuestionHowTo> = {
       "Set rating and monthly review-volume targets on the dashboard.",
       "Done when: you can show the evidence (“Written targets vs actual rating/volume.”) to another person without hunting through chats.",
       "If stuck: start manual (WhatsApp + Excel) this week, then automate after the process works for 14 days.",
+    ],
+  },
+  'rp-crisis': {
+    summary: "Document a crisis SOP: named spokesperson, who approves public statements, and the escalation path to leadership/legal within 2 hours of a multi-channel incident.",
+    steps: [
+      "Who owns this: assign Owner / marketing as the accountable person and put a due date on the calendar (usually 7–30 days).",
+      "Gather baseline evidence first: Written crisis SOP naming spokesperson, escalation path, and response timeline for a multi-channel incident.",
+      "Name one spokesperson (and a backup) authorized to speak publicly on behalf of the hospital during an incident.",
+      "Define what counts as \"crisis-level\" (e.g. multiple platforms, news coverage, coordinated complaints) versus a routine single review.",
+      "Write the escalation path: who is notified first, who approves the public statement, and the 2-hour response-time target.",
+      "Draft one holding-statement template so the first response doesn't have to be written from scratch under pressure.",
+      "Done when: you can show the evidence (“Written crisis SOP naming spokesperson, escalation path, and response timeline for a multi-channel incident.”) to another person without hunting through chats.",
+      "If stuck: start with a one-paragraph SOP naming just the spokesperson and escalation contact; expand it after the first real test.",
     ],
   },
   'gv-dashboard': {

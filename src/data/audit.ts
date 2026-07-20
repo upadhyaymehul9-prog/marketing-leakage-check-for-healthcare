@@ -106,6 +106,20 @@ export const AUDIT_SECTIONS: AuditSection[] = [
         owner: 'Marketing lead',
         source: 'marketing',
       },
+      {
+        id: 'dp-domain-renewal',
+        text: 'Is your website domain and hosting renewal on autopay or a monitored calendar reminder well before expiry?',
+        severity: 'High',
+        controlArea: 'Domain/hosting renewal',
+        evidenceHint:
+          'Registrar/hosting invoice showing autopay enabled, or a calendar reminder set at least 30 days before expiry.',
+        explanation:
+          'A lapsed domain or hosting plan takes the entire website — and any linked landing pages — offline until renewed. It is a common, entirely avoidable outage.',
+        recommendation:
+          'Enable autopay with a valid card on file, or set a calendar reminder at least 30 days before domain/hosting expiry with a named owner.',
+        owner: 'Marketing / IT lead',
+        source: 'marketing',
+      },
     ],
   },
   {
@@ -400,6 +414,20 @@ export const AUDIT_SECTIONS: AuditSection[] = [
         owner: 'Medical director / marketing',
         source: 'marketing',
       },
+      {
+        id: 'camp-sms-compliance',
+        text: 'Are SMS/WhatsApp marketing messages DLT-registered and DND/opt-in compliant?',
+        severity: 'High',
+        controlArea: 'Marketing message compliance',
+        evidenceHint:
+          'DLT registration certificate/entity ID and an opt-in/opt-out log for promotional sends.',
+        explanation:
+          'Sending unregistered promotional SMS, or messaging DND-registered numbers without consent, risks blocked messages, regulatory fines, and patient complaints under TRAI/DLT rules.',
+        recommendation:
+          'Register your entity and templates on the telecom DLT platform; send promotional SMS/WhatsApp only to opted-in numbers; honor opt-out requests immediately.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
     ],
   },
   {
@@ -568,6 +596,18 @@ export const AUDIT_SECTIONS: AuditSection[] = [
         owner: 'Marketing lead',
         source: 'marketing',
       },
+      {
+        id: 'ct-social-media',
+        text: 'Are Instagram/Facebook/YouTube profiles active, regularly posted, and monitored for DM/comment replies?',
+        severity: 'Medium',
+        controlArea: 'Organic social media',
+        evidenceHint:
+          'Post history from the last 30 days plus average DM/comment reply time.',
+        recommendation:
+          'Assign an owner to post weekly and reply to DMs/comments within 24 hours; fix or archive inactive profiles.',
+        owner: 'Marketing lead',
+        source: 'marketing',
+      },
     ],
   },
   {
@@ -638,6 +678,18 @@ export const AUDIT_SECTIONS: AuditSection[] = [
         recommendation:
           'Add a referral ask to the discharge checklist for promoters.',
         owner: 'Front office lead',
+        source: 'marketing',
+      },
+      {
+        id: 'rf-corporate',
+        text: 'Do you have active corporate wellness or TPA/insurer empanelment tie-ups tracked as an acquisition channel?',
+        severity: 'Medium',
+        controlArea: 'Corporate / TPA channel',
+        evidenceHint:
+          'List of empanelled TPAs/insurers or corporate tie-ups with enquiry/booking volume attributed to each.',
+        recommendation:
+          'Maintain an empanelment/tie-up list with a named owner; track enquiries and bookings from each corporate/TPA source monthly.',
+        owner: 'Owner / marketing',
         source: 'marketing',
       },
     ],
@@ -1206,6 +1258,20 @@ export const AUDIT_SECTIONS: AuditSection[] = [
         recommendation:
           'Set targets (e.g. ≥4.5★, N new reviews/month) and track on the marketing dashboard.',
         owner: 'Marketing lead',
+        source: 'branding',
+      },
+      {
+        id: 'rp-crisis',
+        text: 'Is there a crisis communication SOP for multi-channel or viral reputation events (beyond single-review replies)?',
+        severity: 'Medium',
+        controlArea: 'Crisis communication',
+        evidenceHint:
+          'Written crisis SOP naming spokesperson, escalation path, and response timeline for a multi-channel incident.',
+        explanation:
+          'A single bad review has a routine response process, but a viral complaint, news story, or coordinated social pile-on needs a pre-agreed escalation path — improvising in the moment risks making things worse.',
+        recommendation:
+          'Document a crisis SOP: named spokesperson, who approves public statements, and the escalation path to leadership/legal within 2 hours of a multi-channel incident.',
+        owner: 'Owner / marketing',
         source: 'branding',
       },
     ],
