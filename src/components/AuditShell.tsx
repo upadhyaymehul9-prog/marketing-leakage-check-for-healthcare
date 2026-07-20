@@ -130,20 +130,39 @@ export default function AuditShell({
             );
           })}
 
-          <div className="page-nav page-nav--sidebar" role="group" aria-label="Audit pages">
+          <div className="sidebar__group sidebar__group--divider">
+            Switch audit
+          </div>
+          <div className="mode-switch" role="group" aria-label="Audit pages">
             <button
               type="button"
-              className={`page-nav__link ${page === 'marketing' ? 'is-active' : ''}`}
+              className={`mode-switch__item mode-switch__item--marketing ${
+                page === 'marketing' ? 'is-active' : ''
+              }`}
+              aria-current={page === 'marketing' ? 'true' : undefined}
+              aria-label="Marketing Health"
               onClick={() => onNavigate('marketing')}
             >
-              Marketing Health
+              <span className="mode-switch__icon">📈</span>
+              <span className="mode-switch__text">
+                <span className="mode-switch__title">Marketing Health</span>
+                <span className="mode-switch__desc">Acquisition &amp; retention</span>
+              </span>
             </button>
             <button
               type="button"
-              className={`page-nav__link ${page === 'branding' ? 'is-active' : ''}`}
+              className={`mode-switch__item mode-switch__item--branding ${
+                page === 'branding' ? 'is-active' : ''
+              }`}
+              aria-current={page === 'branding' ? 'true' : undefined}
+              aria-label="Brand Health"
               onClick={() => onNavigate('branding')}
             >
-              Brand Health
+              <span className="mode-switch__icon">🎯</span>
+              <span className="mode-switch__text">
+                <span className="mode-switch__title">Brand Health</span>
+                <span className="mode-switch__desc">Identity &amp; experience</span>
+              </span>
             </button>
           </div>
         </nav>

@@ -144,46 +144,72 @@ button {
   margin-right: 4px;
 }
 
-.page-nav {
+.mode-switch {
   display: flex;
-  gap: 6px;
-  background: var(--panel2);
-  padding: 4px;
-  border-radius: 10px;
-}
-
-.page-nav--sidebar {
   flex-direction: column;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  background: transparent;
-  border-radius: 0;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
-.page-nav--sidebar .page-nav__link {
-  text-align: left;
-  padding: 10px 14px;
-}
-
-.page-nav__link {
-  border: none;
-  background: transparent;
-  color: var(--muted);
-  padding: 8px 14px;
+.mode-switch__item {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
   border-radius: 8px;
+  background: var(--panel2);
+  color: var(--text);
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.mode-switch__item:hover {
+  border-color: var(--muted);
+}
+
+.mode-switch__icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--panel);
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.mode-switch__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.mode-switch__title {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.page-nav__link:hover {
-  color: var(--white);
+.mode-switch__desc {
+  font-size: 11px;
+  color: var(--muted);
 }
 
-.page-nav__link.is-active {
-  background: transparent;
-  border-bottom: 3px solid var(--gold);
-  border-radius: 8px 8px 0 0;
+.mode-switch__item--marketing.is-active {
+  background: rgba(79, 195, 247, 0.14);
+  border-color: var(--blue);
+}
+.mode-switch__item--marketing.is-active .mode-switch__title {
+  color: var(--blue);
+}
+
+.mode-switch__item--branding.is-active {
+  background: rgba(201, 168, 76, 0.14);
+  border-color: var(--gold);
+}
+.mode-switch__item--branding.is-active .mode-switch__title {
   color: var(--gold);
 }
 
@@ -241,6 +267,12 @@ button {
 
 .sidebar__group:first-child {
   margin-top: 4px;
+}
+
+.sidebar__group--divider {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
 .sidebar__item {
