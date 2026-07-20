@@ -52,9 +52,16 @@ export default function Report({ result, onBack }: ReportProps) {
 
   return (
     <div className="report">
-      <div className="report__top">
+      <div className="report__top no-print">
         <button type="button" className="btn btn--ghost" onClick={onBack}>
           ← Back to questionnaire
+        </button>
+        <button
+          type="button"
+          className="btn btn--primary"
+          onClick={() => window.print()}
+        >
+          Print / Save as PDF
         </button>
       </div>
 

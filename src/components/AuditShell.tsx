@@ -11,14 +11,26 @@ interface AuditShellProps {
   result: AuditResult;
   pageHealth: HealthBand;
   pageCompletion: number;
+  lastSavedAt: number | null;
   children: ReactNode;
   onSelect: (id: string) => void;
   onReset: () => void;
   onReport: () => void;
+  onExport: () => void;
+  onImportClick: () => void;
 }
 
 function healthClass(band: string): string {
   return band.toLowerCase().replace(/\s+/g, '-');
+}
+
+function formatSavedAt(ts: number | null): string {
+  if (ts === null) return 'Not saved yet';
+  const diffMs = Date.now() - ts;
+  if (diffMs < 60_000) return 'Saved just now';
+  const mins = Math.round(diffMs / 60_000);
+  if (mins < 60) return `Saved ${mins} min ago`;
+  return `Saved ${new Date(ts).toLocaleString()}`;
 }
 
 export default function AuditShell({
@@ -29,10 +41,13 @@ export default function AuditShell({
   result,
   pageHealth,
   pageCompletion,
+  lastSavedAt,
   children,
   onSelect,
   onReset,
   onReport,
+  onExport,
+  onImportClick,
 }: AuditShellProps) {
   const pct = Math.round(pageCompletion * 100);
   const meta = new Map(
@@ -94,6 +109,13 @@ export default function AuditShell({
         </div>
 
         <div className="audit-header__actions">
+          <span className="audit-header__saved">{formatSavedAt(lastSavedAt)}</span>
+          <button type="button" className="btn btn--ghost" onClick={onImportClick}>
+            Import
+          </button>
+          <button type="button" className="btn btn--ghost" onClick={onExport}>
+            Export
+          </button>
           <button type="button" className="btn btn--ghost" onClick={onReset}>
             Reset
           </button>

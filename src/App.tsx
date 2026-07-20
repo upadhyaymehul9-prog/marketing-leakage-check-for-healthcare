@@ -1,8 +1,13 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AUDIT_SECTIONS } from './data/audit';
 import { SECTION_HOW_TO } from './data/howToAchieve';
 import { calculateAudit } from './lib/scoring';
-import { clearState, loadState, saveState } from './lib/storage';
+import {
+  clearState,
+  loadState,
+  sanitizeResponses,
+  saveState,
+} from './lib/storage';
 import type { AnswerValue, ResponseMap } from './types';
 import AuditShell, { type AuditPage } from './components/AuditShell';
 import QuestionCard from './components/QuestionCard';
@@ -23,10 +28,56 @@ export default function App() {
   const [activeSectionId, setActiveSectionId] = useState(pageSections[0].id);
   const [view, setView] = useState<View>('audit');
   const [confirmReset, setConfirmReset] = useState(false);
+  const [lastSavedAt, setLastSavedAt] = useState<number | null>(
+    () => loadState().updatedAt,
+  );
+  const isFirstRender = useRef(true);
+  const importInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    saveState({ version: 1, responses, updatedAt: Date.now() });
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const now = Date.now();
+    saveState({ version: 1, responses, updatedAt: now });
+    setLastSavedAt(now);
   }, [responses]);
+
+  const handleExport = () => {
+    const payload = JSON.stringify(
+      { version: 1, responses, exportedAt: Date.now() },
+      null,
+      2,
+    );
+    const blob = new Blob([payload], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const date = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = `hospital-marketing-brand-audit-${date}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImportClick = () => {
+    importInputRef.current?.click();
+  };
+
+  const handleImportFile = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(String(reader.result)) as {
+          responses?: unknown;
+        };
+        setResponses(sanitizeResponses(parsed.responses));
+      } catch {
+        // ignore invalid file; leave current answers untouched
+      }
+    };
+    reader.readAsText(file);
+  };
 
   const result = useMemo(
     () => calculateAudit(AUDIT_SECTIONS, responses),
@@ -68,6 +119,7 @@ export default function App() {
   const doReset = () => {
     clearState();
     setResponses({});
+    setLastSavedAt(null);
     setConfirmReset(false);
     setView('audit');
     setPage('marketing');
@@ -88,9 +140,12 @@ export default function App() {
         result={result}
         pageHealth={pageHealth}
         pageCompletion={pageCompletion}
+        lastSavedAt={lastSavedAt}
         onSelect={setActiveSectionId}
         onReset={() => setConfirmReset(true)}
         onReport={() => setView('report')}
+        onExport={handleExport}
+        onImportClick={handleImportClick}
       >
         <section className="section-intro">
           <h2>{activeSection.name}</h2>
@@ -123,6 +178,18 @@ export default function App() {
           ))}
         </div>
       </AuditShell>
+
+      <input
+        ref={importInputRef}
+        type="file"
+        accept="application/json"
+        style={{ display: 'none' }}
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) handleImportFile(file);
+          e.target.value = '';
+        }}
+      />
 
       {confirmReset && (
         <div className="modal-overlay" role="dialog" aria-modal="true">

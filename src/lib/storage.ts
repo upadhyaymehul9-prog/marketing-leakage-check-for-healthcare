@@ -19,7 +19,7 @@ function isValidResponse(v: unknown): v is Response {
   return typeof c.updatedAt === 'number';
 }
 
-function sanitize(raw: unknown): ResponseMap {
+export function sanitizeResponses(raw: unknown): ResponseMap {
   if (typeof raw !== 'object' || raw === null) return {};
   const out: ResponseMap = {};
   for (const [k, v] of Object.entries(raw as Record<string, unknown>)) {
@@ -38,7 +38,7 @@ export function loadState(): AuditState {
     if (c.version !== SCHEMA_VERSION) return emptyState();
     return {
       version: SCHEMA_VERSION,
-      responses: sanitize(c.responses),
+      responses: sanitizeResponses(c.responses),
       updatedAt: typeof c.updatedAt === 'number' ? c.updatedAt : null,
     };
   } catch {

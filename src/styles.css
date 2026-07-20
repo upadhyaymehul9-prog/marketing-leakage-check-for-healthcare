@@ -133,7 +133,15 @@ button {
 
 .audit-header__actions {
   display: flex;
+  align-items: center;
   gap: 8px;
+}
+
+.audit-header__saved {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+  margin-right: 4px;
 }
 
 .page-nav {
@@ -565,6 +573,14 @@ button {
   padding: 24px 28px 48px;
 }
 
+.report__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
 .report__eyebrow {
   font-size: 12px;
   text-transform: uppercase;
@@ -880,5 +896,54 @@ button {
   .report__summary-grid,
   .plan-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff;
+  }
+
+  .report {
+    max-width: none;
+    color: #1a2b42;
+  }
+
+  .summary-card,
+  .dept-card,
+  .action-item,
+  .plan-column {
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .report__disclaimer {
+    background: #fff;
+    border-left-color: #c9a84c;
+  }
+
+  .report__eyebrow,
+  .report__header h2,
+  .report__section h3,
+  .dept-card__name,
+  .action-item__text,
+  .plan-column h4 {
+    color: #1a2b42;
+  }
+
+  .action-item__howto {
+    background: #f7f9fc;
+  }
+
+  .status-tag--unassessed {
+    background: #e4e8ee;
+    color: #1a2b42;
   }
 }
