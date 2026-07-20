@@ -131,7 +131,7 @@ export default function QuestionIllustration({
       <svg
         viewBox="0 0 640 280"
         role="img"
-        aria-label={`Illustration: ${meta.title}. ${meta.what}`}
+        aria-label={`Illustration: ${meta.title}`}
         className="question-illustration__svg"
       >
         <rect width="640" height="280" rx="16" fill={colors.bg} />
@@ -150,7 +150,8 @@ export default function QuestionIllustration({
           <MotifIcon motif={meta.motif} accent={colors.accent} />
         </svg>
 
-        {/* What it is */}
+        {/* Control area label — the icon's caption, not a repeat of the
+            question text/explanation already shown in the card above */}
         <text
           x="168"
           y="48"
@@ -159,31 +160,18 @@ export default function QuestionIllustration({
           fontWeight="700"
           fontFamily="Segoe UI, system-ui, sans-serif"
         >
-          WHAT THIS IS
+          CONTROL
         </text>
         <text
           x="168"
-          y="74"
+          y="76"
           fill={colors.ink}
-          fontSize="20"
+          fontSize="24"
           fontWeight="700"
           fontFamily="Segoe UI, system-ui, sans-serif"
         >
-          {meta.title.length > 36 ? `${meta.title.slice(0, 34)}…` : meta.title}
+          {meta.title.length > 30 ? `${meta.title.slice(0, 28)}…` : meta.title}
         </text>
-        {wrapText(meta.what, 52).slice(0, 3).map((line, i) => (
-          <text
-            key={`what-${i}`}
-            x="168"
-            y={102 + i * 18}
-            fill={colors.ink}
-            fontSize="13"
-            opacity="0.8"
-            fontFamily="Segoe UI, system-ui, sans-serif"
-          >
-            {line}
-          </text>
-        ))}
 
         {/* How to achieve strip */}
         <text
