@@ -74,23 +74,6 @@ export default function AuditShell({
           </div>
         </div>
 
-        <nav className="page-nav" aria-label="Audit pages">
-          <button
-            type="button"
-            className={`page-nav__link ${page === 'marketing' ? 'is-active' : ''}`}
-            onClick={() => onNavigate('marketing')}
-          >
-            Marketing Health
-          </button>
-          <button
-            type="button"
-            className={`page-nav__link ${page === 'branding' ? 'is-active' : ''}`}
-            onClick={() => onNavigate('branding')}
-          >
-            Brand Health
-          </button>
-        </nav>
-
         <div className="audit-header__scores">
           <div className="score-pill">
             <span className="score-pill__label">
@@ -146,6 +129,23 @@ export default function AuditShell({
               </button>
             );
           })}
+
+          <div className="page-nav page-nav--sidebar" role="group" aria-label="Audit pages">
+            <button
+              type="button"
+              className={`page-nav__link ${page === 'marketing' ? 'is-active' : ''}`}
+              onClick={() => onNavigate('marketing')}
+            >
+              Marketing Health
+            </button>
+            <button
+              type="button"
+              className={`page-nav__link ${page === 'branding' ? 'is-active' : ''}`}
+              onClick={() => onNavigate('branding')}
+            >
+              Brand Health
+            </button>
+          </div>
         </nav>
 
         <main className="audit-content">{children}</main>

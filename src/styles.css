@@ -152,6 +152,20 @@ button {
   border-radius: 10px;
 }
 
+.page-nav--sidebar {
+  flex-direction: column;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  background: transparent;
+  border-radius: 0;
+}
+
+.page-nav--sidebar .page-nav__link {
+  text-align: left;
+  padding: 10px 14px;
+}
+
 .page-nav__link {
   border: none;
   background: transparent;
