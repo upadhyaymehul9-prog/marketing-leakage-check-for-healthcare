@@ -481,25 +481,6 @@ button {
   color: var(--muted);
 }
 
-.question-illustration {
-  margin: 0 0 14px;
-}
-
-.question-illustration__svg {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.question-illustration__caption {
-  margin: 6px 0 0;
-  font-size: 11px;
-  color: var(--muted);
-}
-
 .question-card__prompt {
   margin: 0 0 6px;
   font-size: 12px;

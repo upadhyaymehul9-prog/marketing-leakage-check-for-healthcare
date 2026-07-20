@@ -1,7 +1,6 @@
 import type { AnswerValue, AuditQuestion, Response } from '../types';
 import { ANSWER_LABELS, ANSWER_ORDER } from '../data/audit';
 import { getQuestionHowTo } from '../data/questionHowTo';
-import QuestionIllustration from './QuestionIllustration';
 
 interface QuestionCardProps {
   index: number;
@@ -54,8 +53,6 @@ export default function QuestionCard({
           );
         })}
       </div>
-
-      <QuestionIllustration question={question} />
 
       <div className="question-card__evidence">
         <strong>Evidence to check:</strong> {question.evidenceHint}

@@ -47,16 +47,6 @@ test('shows detailed audit evidence hints on questions', () => {
   expect(screen.getByText(/Audit objective:/i)).toBeInTheDocument();
 });
 
-test('shows an explainer illustration on each question', () => {
-  render(<App />);
-  expect(
-    screen.getAllByRole('img', { name: /Illustration:/i }).length,
-  ).toBeGreaterThan(0);
-  expect(
-    screen.getAllByText(/Visual guide for this control/i).length,
-  ).toBeGreaterThan(0);
-});
-
 test('selecting an answer updates section completion', async () => {
   const user = userEvent.setup();
   render(<App />);
