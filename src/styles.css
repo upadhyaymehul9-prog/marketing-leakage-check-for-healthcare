@@ -500,6 +500,13 @@ button {
   color: var(--muted);
 }
 
+.question-card__prompt {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
 .answer-options {
   display: flex;
   flex-wrap: wrap;

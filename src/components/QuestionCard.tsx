@@ -35,6 +35,7 @@ export default function QuestionCard({
         <p className="question-card__explanation">{question.explanation}</p>
       )}
 
+      <p className="question-card__prompt">Select your answer:</p>
       <div className="answer-options" role="group" aria-label="Answer options">
         {ANSWER_ORDER.map((value) => {
           const selected = response?.answer === value;
