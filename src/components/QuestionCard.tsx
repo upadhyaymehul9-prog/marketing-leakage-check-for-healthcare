@@ -35,11 +35,6 @@ export default function QuestionCard({
         <p className="question-card__explanation">{question.explanation}</p>
       )}
 
-      <QuestionIllustration question={question} />
-
-      <div className="question-card__evidence">
-        <strong>Evidence to check:</strong> {question.evidenceHint}
-      </div>
       <div className="answer-options" role="group" aria-label="Answer options">
         {ANSWER_ORDER.map((value) => {
           const selected = response?.answer === value;
@@ -57,6 +52,12 @@ export default function QuestionCard({
             </button>
           );
         })}
+      </div>
+
+      <QuestionIllustration question={question} />
+
+      <div className="question-card__evidence">
+        <strong>Evidence to check:</strong> {question.evidenceHint}
       </div>
 
       <details className="how-to">
