@@ -993,3 +993,40 @@ button {
     color: #1a2b42;
   }
 }
+
+/* ── Email gate ─────────────────────────────────────────── */
+.email-gate {
+  min-height: 100vh;
+  display: flex;
+  padding: 24px;
+  overflow-y: auto;
+  background: var(--bg);
+}
+.email-gate__card {
+  /* margin:auto centers the card when it fits, but lets it align to the top
+     and scroll (instead of clipping) when it's taller than the viewport. */
+  margin: auto;
+  width: 100%;
+  max-width: 440px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.email-gate__back { margin-bottom: 16px; }
+.email-gate__teaser { color: var(--white); margin: 4px 0 8px; font-size: 1.25rem; }
+.email-gate__sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+.email-gate__form { display: flex; flex-direction: column; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field__label { color: var(--text); font-size: 0.85rem; font-weight: 600; }
+.field__input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--white);
+  font-size: 0.95rem;
+}
+.field__input:focus { outline: none; border-color: var(--gold); }
+.field__error { color: var(--red); font-size: 0.8rem; }
+.email-gate__submit { margin-top: 4px; }

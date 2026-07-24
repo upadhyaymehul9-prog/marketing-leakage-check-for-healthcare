@@ -1,4 +1,4 @@
-import type { AuditState, Response, ResponseMap } from '../types';
+import type { AuditState, LeadInfo, Response, ResponseMap } from '../types';
 
 export const STORAGE_KEY = 'hospital-marketing-brand-audit:v1';
 const SCHEMA_VERSION = 1;
@@ -57,6 +57,32 @@ export function saveState(state: AuditState): void {
 export function clearState(): void {
   try {
     localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+export const LEAD_STORAGE_KEY = 'hospital-marketing-brand-audit:lead:v1';
+
+export function hasLead(): boolean {
+  try {
+    return localStorage.getItem(LEAD_STORAGE_KEY) !== null;
+  } catch {
+    return false;
+  }
+}
+
+export function saveLead(lead: LeadInfo): void {
+  try {
+    localStorage.setItem(LEAD_STORAGE_KEY, JSON.stringify(lead));
+  } catch {
+    // ignore quota / private mode
+  }
+}
+
+export function clearLead(): void {
+  try {
+    localStorage.removeItem(LEAD_STORAGE_KEY);
   } catch {
     // ignore
   }

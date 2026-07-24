@@ -4,6 +4,7 @@ import { SECTION_HOW_TO } from './data/howToAchieve';
 import { calculateAudit } from './lib/scoring';
 import {
   clearState,
+  hasLead,
   loadState,
   sanitizeResponses,
   saveState,
@@ -12,6 +13,7 @@ import type { AnswerValue, ResponseMap } from './types';
 import AuditShell, { type AuditPage } from './components/AuditShell';
 import QuestionCard from './components/QuestionCard';
 import Report from './components/Report';
+import EmailGate from './components/EmailGate';
 
 type View = 'audit' | 'report';
 
@@ -27,6 +29,7 @@ export default function App() {
   const pageSections = sectionsFor(page);
   const [activeSectionId, setActiveSectionId] = useState(pageSections[0].id);
   const [view, setView] = useState<View>('audit');
+  const [leadCaptured, setLeadCaptured] = useState<boolean>(() => hasLead());
   const [confirmReset, setConfirmReset] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<number | null>(
     () => loadState().updatedAt,
@@ -127,6 +130,15 @@ export default function App() {
   };
 
   if (view === 'report') {
+    if (!leadCaptured) {
+      return (
+        <EmailGate
+          result={result}
+          onSubmit={() => setLeadCaptured(true)}
+          onBack={() => setView('audit')}
+        />
+      );
+    }
     return <Report result={result} onBack={() => setView('audit')} />;
   }
 

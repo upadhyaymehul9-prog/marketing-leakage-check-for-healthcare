@@ -86,3 +86,11 @@ export interface AuditResult {
   confidence: ConfidenceLevel;
   actions: ReportAction[];
 }
+
+export interface LeadInfo {
+  name: string;
+  hospitalName: string;
+  email: string;
+  phone?: string;
+  capturedAt: number;
+}
